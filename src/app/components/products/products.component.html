@@ -1,0 +1,321 @@
+ <!-- ==========Page Header Section Starts Here========== -->
+<!-- Desktop Carousel (visible on screens wider than or equal to md) -->
+<div id="desktopCarousel" class="carousel slide d-none d-md-block" *ngIf="!isLoading">
+    <!-- Carousel Indicators -->
+    <ol class="carousel-indicators">
+        <li *ngFor="let data of banners; let i = index" [attr.data-bs-target]="'#desktopCarousel'" [attr.data-bs-slide-to]="i" [class.active]="i === 0"></li>
+    </ol>
+
+    <!-- Carousel Slides -->
+    <div class="carousel-inner" style="margin-top: 120px;">
+        <div *ngFor="let data of banners; let i = index" [class]="i === 0 ? 'carousel-item active' : 'carousel-item'">
+        <img [src]="baseurl + '/api/files/get/' + data?.banner" class="d-block w-100" alt="...">
+        </div>
+    </div>
+
+    <!-- Carousel Controls -->
+    <a class="carousel-control-prev" href="#desktopCarousel" role="button" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#desktopCarousel" role="button" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </a>
+</div>
+
+<!-- Mobile Carousel (visible on screens smaller than md) -->
+<div id="mobileCarousel" class="carousel slide d-md-none" *ngIf="!isLoading">
+<!-- Carousel Indicators -->
+<ol class="carousel-indicators">
+    <li *ngFor="let data of banners; let i = index" [attr.data-bs-target]="'#mobileCarousel'" [attr.data-bs-slide-to]="i" [class.active]="i === 0"></li>
+</ol>
+
+<!-- Carousel Slides -->
+<div class="carousel-inner" style="margin-top: 120px;">
+    <div *ngFor="let data of banners; let i = index" [class]="i === 0 ? 'carousel-item active' : 'carousel-item'">
+    <img [src]="baseurl + '/api/files/get/' + data?.mobile_banner" class="d-block w-100" alt="...">
+    </div>
+</div>
+
+<!-- Carousel Controls -->
+<a class="carousel-control-prev" href="#mobileCarousel" role="button" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+</a>
+<a class="carousel-control-next" href="#mobileCarousel" role="button" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+</a>
+</div>
+<!-- ==========Page Header Section Ends Here========== -->
+
+<!-- ===============>> Course categories section start here <<================= -->
+<section class="categories categories--style1  brand1-bg-1" *ngIf="!isLoading" style="padding-top: 80px;padding-bottom:80px">
+    <div class="container">
+        <div class="categories__wrapper">
+            <div class="row g-4">
+                <div class="col-lg-5" data-aos="fade-right" data-aos-duration="800">
+                    <div class="section-header pe-3">
+                        <h2>Artistic Haven</h2>
+                        <span>Discover artistic possibilities at Moniqart, your curated haven for premium art supplies. Unleash creativity with quality canvases, exquisite brushes, and vibrant colors. Explore unique collections, express yourself, and turn your artistic vision into reality. Moniqart – where passion meets premium art essentials.</span>
+                        <a routerLink="/all-courses" target="_blank" class="trk-btn trk-btn--rounded trk-btn--secondary1">Explore Categories</a>
+                    </div>
+                </div>
+                <div class="col-lg-7">
+                    <div class="row g-4" data-aos="fade-left" data-aos-duration="800">
+                        <div *ngIf="categories.length > 0" id="categoriesCarousel" class="carousel slide" data-bs-ride="carousel">
+                          <div class="carousel-inner">
+                            <div class="carousel-item active">
+                              <div class="row">
+                                <div *ngFor="let category of categories.slice(0, 8)" class="col-lg-3 col-md-3 col-sm-3 col-4">
+                                  <div class="categories__item" style="margin-top: 10px;">
+                                    <div class="categories__item-inner">
+                                      <div class="categories__thumb categories__thumb--cat1">
+                                        <img src="{{baseurl}}/api/files/get/{{category?.categoryicon}}" alt="course icon">
+                                      </div>
+                                      <div class="categories__item-content">
+                                        <a (click)="onSortChange(category?._id)" style="cursor: pointer;" class="stretched-link active">{{category?.name}}</a>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            
+                            <!-- Add more slides if there are additional categories -->
+                            <div *ngIf="categories.length > 8" class="carousel-item">
+                              <div class="row">
+                                <div *ngFor="let category of categories.slice(8, 16)" class="col-lg-3 col-md-3 col-sm-3 col-4">
+                                  <div class="categories__item" style="margin-top: 10px;">
+                                    <div class="categories__item-inner">
+                                      <div class="categories__thumb categories__thumb--cat1">
+                                        <img src="{{baseurl}}/api/files/get/{{category?.categoryicon}}" alt="course icon">
+                                      </div>
+                                      <div class="categories__item-content">
+                                        <a (click)="onSortChange(category?._id)" style="cursor: pointer;" class="stretched-link active">{{category?.name}}</a>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          
+                          <button *ngIf="categories.length > 8" class="carousel-control-prev" type="button" data-bs-target="#categoriesCarousel" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                          </button>
+                          <button *ngIf="categories.length > 8" class="carousel-control-next" type="button" data-bs-target="#categoriesCarousel" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                          </button>
+                        </div>
+                      </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- ===============>> Course categories section end here <<================= -->
+
+
+<!-- ==========Courses Section start Here========== -->
+<div class="course course--style1 padding-bottom" *ngIf="!isLoading" style="padding-top: 50px;">
+    <div class="container">
+        <div class="course__topbar">
+            <div class="course__topbar-left" data-aos="fade-right" data-aos-duration="800">
+                <div class="input-group">
+                    <input type="text" class="form-control" #searchInput placeholder="Search">
+                    <button (click)="filterCourse(searchInput.value,'name')" class="trk-btn trk-btn--rounded trk-btn--primary1" type="button">
+                        <i class="fas fa-search" style="color: #ffffff;"></i>
+                    </button>
+                    <a href="/shop" class="trk-btn trk-btn--rounded trk-btn--primary1">Reset</a>
+                </div>
+              </div>
+              <div class="form-group">
+                    
+              </div>
+              <div class="form-group">
+                <select name="cars" class="form-select" (change)="onSortChange($event)">
+                    <option value="filter">Filter By</option>
+                    <option value="latest">Sort by latest</option>
+                    <option value="lowToHigh">Sort by price: low to high</option>
+                    <option value="highToLow">Sort by price: high to low</option>
+                </select>
+                <div class="card" style="margin-top: 20px;">
+                    <div class="card-body">
+                        <label for="customRange1" class="form-label">Price range : <strong>{{ selectedRange ? selectedRange : 'Not Defined'}}</strong></label>
+                        <input type="range" min="{{lowestPrice}}" max="{{highestPrice}}" [(ngModel)]="selectedRange" class="form-range" (change)="filterCourse('','',selectedRange)" id="customRange1">
+                    </div>
+                </div>
+              </div>
+        </div>
+        <div class="course__wrapper" data-aos="fade-up" data-aos-duration="800">
+            <div class="tab-content" id="pills-tabContent" *ngIf="!search">
+                <div *ngIf="best_products.length > 0" class="tab-pane fade show active" id="pills-english" role="tabpanel" content
+                    aria-labelledby="pills-english-tab" tabindex="0">
+                    <div class="section-header text-center">
+                        <h2>Best Selling Products</h2>
+                        <p class="style2">Discover our carefully curated collection of best-selling art supplies and creations that have resonated deeply with our artistic community.</p>
+                    </div>
+                    <div class="row g-4">
+                        <div *ngFor="let data of best_products | paginate: { itemsPerPage: 6, currentPage: p }"      class="col-lg-4 col-md-6">
+                            <div class="course__item">
+                                <div class="course__item-inner">
+                                    <div class="course__thumb">
+                                        <a class="shimmer_heading"></a>
+                                        <a routerLink="/product/{{data?._id}}"><img style="height: 200px;" src="{{baseurl}}/api/files/get/{{data?.thumbnail}}" alt="Product Images"></a>
+                                        <a (click)="addToBookmark(data)" class="course__btn course__btn--save course__btn--active"><i
+                                            class="fa-regular fa-bookmark"></i></a>
+                                    </div>
+        
+                                    <div class="course__content">
+                                        <div class="course__content-top">
+                                            <span class="course__meta-tag course__meta-tag--cat1">{{searchCategoryById(data?.category)[0]?.name}}</span>
+                                        </div>
+                                        <h6> <a routerLink="/product/{{data?._id}}">{{data?.name}}</a> </h6>
+                                        <div class="course__content-bottom">
+                                            <div class="course-price">
+                                                <del>{{currencyConversion(data?.pricing) | currency:currencycode}}</del> <span>{{currencyConversion(data?.offerprice) | currency:currencycode}}</span>
+                                            </div>
+                                            <button (click)="addToCart(data)" style="float: right;border:none;border-radius: 7px;padding: 10px;"><i class="fas fa-shopping-cart"></i> Add to Cart</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="container" *ngIf="best_products.length > 6" style="margin-top: 100px;">
+                            <pagination-controls (pageChange)="p = $event"></pagination-controls>
+                        </div>
+                        <div *ngIf="best_products.length < 1" class="d-flex justify-content-center align-items-center">
+                            <img src="assets/nofound.png" alt="Not Found">
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade show active" style="margin-top: 100px;" id="pills-english" role="tabpanel" content
+                    aria-labelledby="pills-english-tab" tabindex="0">
+                    <div class="section-header text-center">
+                        <h2>New Launched</h2>
+                        <p class="style2">Introducing Our Newest Artistic Additions: Explore the latest arrivals in our art store, where we've handpicked the most innovative and inspiring products to fuel your creative journey.</p>
+                    </div>
+                    <div class="row g-4">
+                        <div *ngFor="let data of new_products | paginate: { itemsPerPage: 6, currentPage: c }"  class="col-lg-4 col-md-6">
+                            <div class="course__item">
+                                <div class="course__item-inner">
+                                    <div class="course__thumb">
+                                        <a class="shimmer_heading"></a>
+                                        <a routerLink="/product/{{data?._id}}"><img style="height: 200px;" src="{{baseurl}}/api/files/get/{{data?.thumbnail}}" alt="Product Images"></a>
+                                        <a (click)="addToBookmark(data)" class="course__btn course__btn--save course__btn--active"><i
+                                            class="fa-regular fa-bookmark"></i></a>
+                                    </div>
+        
+                                    <div class="course__content">
+                                        <div class="course__content-top">
+                                            <span class="course__meta-tag course__meta-tag--cat1">{{searchCategoryById(data?.category)[0]?.name}}</span>
+                                        </div>
+                                        <h6> <a routerLink="/product/{{data?._id}}">{{data?.name}}</a> </h6>
+                                        <div class="course__content-bottom">
+                                            <div class="course-price">
+                                                <del>{{currencyConversion(data?.pricing) | currency:currencycode}}</del> <span>{{currencyConversion(data?.offerprice) | currency:currencycode}}</span>
+                                            </div>
+                                            <button *ngIf="data?.sku_count < 1" [disabled]="true" style="cursor: pointer;" class="trk-btn trk-btn--border trk-btn--secondary1 d-block">Out of Stock</button>
+                                            <button *ngIf="data?.sku_count > 0" (click)="addToCart(data)" style="float: right;border:none;border-radius: 7px;padding: 10px;"><i class="fas fa-shopping-cart"></i> Add to Cart</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="container" *ngIf="new_products.length > 6" style="margin-top: 100px;">
+                            <pagination-controls (pageChange)="c = $event"></pagination-controls>
+                        </div>
+                        <div *ngIf="new_products.length < 1" class="d-flex justify-content-center align-items-center">
+                            <img src="assets/nofound.png" alt="Not Found">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-content" id="pills-tabContent" *ngIf="search">
+                <div class="tab-pane fade show active" id="pills-english" role="tabpanel" content
+                    aria-labelledby="pills-english-tab" tabindex="0">
+                    <div class="row g-4">
+                        <div *ngFor="let data of products | paginate: { itemsPerPage: 6, currentPage: p }"      class="col-lg-4 col-md-6">
+                            <div class="course__item">
+                                <div class="course__item-inner">
+                                    <div class="course__thumb">
+                                        <a class="shimmer_heading"></a>
+                                        <a routerLink="/product/{{data?._id}}"><img style="height: 200px;" src="{{baseurl}}/api/files/get/{{data?.thumbnail}}" alt="Product Images"></a>
+                                        <a (click)="addToBookmark(data)" class="course__btn course__btn--save course__btn--active"><i
+                                            class="fa-regular fa-bookmark"></i></a>
+                                    </div>
+        
+                                    <div class="course__content">
+                                        <div class="course__content-top">
+                                            <span class="course__meta-tag course__meta-tag--cat1">{{searchCategoryById(data?.category)[0]?.name}}</span>
+                                        </div>
+                                        <h6> <a routerLink="/product/{{data?._id}}">{{data?.name}}</a> </h6>
+                                        <div class="course__content-bottom">
+                                            <div class="course-price">
+                                                <del>{{currencyConversion(data?.pricing) | currency:currencycode}}</del> <span>{{currencyConversion(data?.offerprice) | currency:currencycode}}</span>
+                                            </div>
+                                            <button *ngIf="data?.sku_count < 1" [disabled]="true" style="cursor: pointer;" class="trk-btn trk-btn--border trk-btn--secondary1 d-block">Out of Stock</button>
+                                            <button *ngIf="data?.sku_count > 0" (click)="addToCart(data)" style="float: right;border:none;border-radius: 7px;padding: 10px;"><i class="fas fa-shopping-cart"></i> Add to Cart</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="container" *ngIf="products.length > 6" style="margin-top: 100px;">
+                            <pagination-controls (pageChange)="p = $event"></pagination-controls>
+                        </div>
+                        <div *ngIf="products.length < 1" class="d-flex justify-content-center align-items-center">
+                            <img src="assets/nofound.png" alt="Not Found">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container padding-top padding-bottom" *ngIf="isLoading">
+    <div class="course__wrapper">
+        <app-shimmer  [module]="'product'"></app-shimmer>
+    </div>
+</div>
+<!-- ==========Courses Section Ends Here========== -->
+
+<div class="container padding-bottom">
+	<div class="row">
+	    <div class="col-md-12 col-sm-12 ">
+            <div class="site-heading text-center">
+                <h3>Why Moniqart?</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt <br> ut labore et dolore magna aliqua. Ut enim ad minim </p>
+            </div>			
+	    </div>
+	</div>
+	<div class="row" style="margin-top: 30px;">
+        <div class="col-md-4 col-sm-4 text-center">
+            <div class="feature-box">
+                <img src="assets/images/freeship_ico.png" style="width: 100px;margin-bottom: 10px;" alt="Free Shipping">
+                <h4>FREE SHIPPING</h4>
+                <p>Free Shipping on all orders, Every Order will be delivered with in 9-10 business days.</p>
+            </div>
+        </div> <!-- End Col -->
+        <div class="col-md-4 col-sm-4 text-center">
+            <div class="feature-box">
+                <img src="assets/images/24x7_ico.png" style="width: 100px;margin-bottom: 10px;" alt="Free Shipping">
+                <h4>CUSTOMER SERVICE</h4>
+                <p>24*7 Customer service on call, Live chat, email and all social media profiles.</p>
+            </div>
+        </div> <!-- End Col -->	
+        
+        <div class="col-md-4 col-sm-4 text-center">
+            <div class="feature-box">
+                <img src="assets/images/save_ico.png" style="width: 100px;margin-bottom: 10px;" alt="Free Shipping">
+                <h4>NO ADDITIONAL FEES!</h4>
+                <p>The total billed at checkout is the final amount you pay, with no additional charges at the time of delivery!</p>
+            </div>
+        </div> <!-- End Col -->
+	</div>
+    <div class="clearfix"></div>
+</div>

@@ -1,6 +1,6 @@
  <!-- ==========Page Header Section Starts Here========== -->
- <div class="pageheader" style="background-image:url(assets/images/bg/home1/1.webp)">
-    <div class="container">
+ <div class="pageheader" style="background-image:url(assets/images/banner.jpg)">
+    <div class="container" style="margin-top: 100px;">
         <div class="pageheader__content">
             <h2>Courses</h2>
             <nav aria-label="breadcrumb">
@@ -21,15 +21,20 @@
 <div class="course course--style1 padding-top padding-bottom" *ngIf="!isLoading">
     <div class="container">
         <div class="course__topbar">
-            <!-- <div class="course__topbar-left" data-aos="fade-right" data-aos-duration="800">
-                <select name="cars" class="form-select">
-                    <option value="filter">Filter By</option>
-                    <option value="content">UI/UX </option>
-                    <option value="web">Web Design</option>
-                    <option value="graphic">Graphic</option>
-                    <option value="seo">Social</option>
+            <div class="course__topbar-left" data-aos="fade-right" data-aos-duration="800">
+                <div class="input-group">
+                    <input type="text" class="form-control" #searchInput placeholder="Search">
+                    <button (click)="filterCourse(searchInput.value,'name')" class="trk-btn trk-btn--rounded trk-btn--primary1" type="button">
+                        <i class="fas fa-search" style="color: #ffffff;"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="form-group">
+                <select name="cars" class="form-select" (change)="filterCourse($event.target,'category')">
+                    <option value="filter">Filter By Category</option>
+                    <option value="{{data?._id}}" *ngFor="let data of categories">{{data?.name}}</option>
                 </select>
-            </div> -->
+            </div>
             <!-- <div class="course__topbar-right" data-aos="fade-left" data-aos-duration="800">
                 <ul class="nav nav-pills" id="pills-tab" role="tablist">
                     <li *ngFor="let data of categories" class="nav-item" role="presentation">
@@ -39,18 +44,17 @@
             </div> -->
         </div>
 
-        <div class="course__wrapper" style="margin-bottom: 50px;" data-aos="fade-up" data-aos-duration="800">
+        <div class="course__wrapper" data-aos="fade-up" data-aos-duration="800" style="margin-bottom: 100px;">
             <div class="tab-content" id="pills-tabContent">
                 <div class="tab-pane fade show active" id="pills-english" role="tabpanel" content
                     aria-labelledby="pills-english-tab" tabindex="0">
                     <div class="row g-4">
-                        <div *ngFor="let data of courses | paginate: { itemsPerPage: 10, currentPage: p }" class="col-lg-4 col-md-6">
+                        <div *ngFor="let data of courses | paginate: { itemsPerPage: 9, currentPage: p }" class="col-lg-4 col-md-6">
                             <div class="course__item">
                                 <div class="course__item-inner">
                                     <div class="course__thumb">
+                                        <a class="shimmer_heading"></a>
                                         <a routerLink="/course/{{data?._id}}"><img style="height: 200px;" src="{{baseurl}}/api/files/get/{{data?.thumbnail}}" alt="course Images"></a>
-                                        <a href="#" class="course__btn course__btn--save course__btn--active"><i
-                                                class="fa-regular fa-bookmark"></i></a>
                                     </div>
         
                                     <div class="course__content">
@@ -70,14 +74,19 @@
                             </div>
                         </div>
                     </div>
+                    <div *ngIf="courses.length < 1" class="d-flex justify-content-center align-items-center">
+                        <img src="assets/nofound.png" alt="Not Found">
+                    </div>
                 </div>
             </div>
         </div>
-        <pagination-controls (pageChange)="p = $event"></pagination-controls>
+        <pagination-controls *ngIf="courses.length > 9" (pageChange)="p = $event"></pagination-controls>
     </div>
 </div>
-<div class="d-flex justify-content-center" *ngIf="isLoading" style="padding-top: 100px;padding-bottom: 100px;">
-    <div class="spinner-border" role="status">
+
+<div *ngIf="isLoading" class="container padding-top padding-bottom">
+    <div class="course__wrapper">
+        <app-shimmer [module]="'courses'"></app-shimmer>
     </div>
 </div>
 <!-- ==========Courses Section Ends Here========== -->

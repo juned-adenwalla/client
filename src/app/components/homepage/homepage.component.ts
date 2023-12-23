@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { forkJoin } from 'rxjs';
 import { BaseService } from 'src/app/services/base.service';
+import { CartService } from 'src/app/services/cart.service';
 import { environment } from 'src/environments/environments';
 
 @Component({
@@ -17,7 +18,7 @@ export class HomepageComponent {
   isLoading:any = true;
   blogs: any;
   currencycode: any;
-  constructor(private baseService:BaseService,private router: Router) { }
+  constructor(private baseService:BaseService,private router: Router,private cart: CartService) { }
 
   ngOnInit() {
     this.initFunction();
@@ -67,5 +68,10 @@ export class HomepageComponent {
     const obj = JSON.parse(selectedCurrency);
     this.currencycode = obj.name
     return obj.value * amount;
+  }
+
+  addToBookmark(data:any){
+    data['type'] = 'course';
+    this.cart.addbookMark(data);
   }
 }

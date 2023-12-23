@@ -1,6 +1,8 @@
-import { Component, ElementRef, Input, Renderer2 } from '@angular/core';
-import { Router } from '@angular/router';
+import { ChangeDetectorRef, Component, ElementRef, HostListener, Input, Renderer2 } from '@angular/core';
+import { NavigationEnd, Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth.service';
 import { BaseService } from 'src/app/services/base.service';
+import { CartService } from 'src/app/services/cart.service';
 import { environment } from 'src/environments/environments';
 
 @Component({
@@ -15,18 +17,33 @@ export class HeaderComponent {
   selectedCurrency:any = {}
   userdata: any;
   isMenuOpen = false;
-  constructor(private baseService:BaseService,private router: Router,private el: ElementRef, private renderer: Renderer2) { }
+  constructor(private baseService:BaseService,private router: Router,private el: ElementRef, private renderer: Renderer2, private cart: CartService,private auth:AuthService, private cd: ChangeDetectorRef) {
+    this.router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        // Check if the current route is "home"
+        const isHomeRoute = event.url === '/' || event.urlAfterRedirects === '/';
+        // Apply the CSS class based on the route
+        const header = this.el.nativeElement.querySelector('.header-section');
+        this.closeHeader();
+        if (isHomeRoute) {
+          this.renderer.addClass(header, 'home');
+        } else {
+          this.renderer.removeClass(header, 'home');
+        }
+      }
+    });
+  }
 
   ngOnInit() {
     if(localStorage.getItem('currency')){
       const selectedCurrency:any = localStorage.getItem('currency');
       this.selectedCurrency = JSON.parse(selectedCurrency);
     }else{
-      localStorage.setItem('currency','{"_id":3,"name":"INR","value":"1","status":"1"}')
+      localStorage.setItem('currency',JSON.stringify({"_id":3,"name":"INR","value":"1","status":"1"}))
     }
-    if(localStorage.getItem('userdata')){
-      const userdata:any = localStorage.getItem('userdata');
-      this.userdata = JSON.parse(userdata);
+    if(this.auth.getUser()){
+      const userdata:any = this.auth.getUser();
+      this.userdata = userdata;
     }else{
       this.userdata = undefined;
     }
@@ -34,13 +51,21 @@ export class HeaderComponent {
     this.baseService.get('/api/midoffice/list/collection/' + "tblcurrencies",{filter:"status",value:1}).subscribe((res:any)=>{
       if(res["status"]){
         this.currencies = res["data"];
-        console.log(this.currencies)
       }
     });
   }
 
+  closeHeader(){
+    const menu = this.el.nativeElement.querySelector('.menu');
+
+    if (menu) {
+      this.renderer.removeClass(menu, 'active');
+      this.isMenuOpen = false;
+      this.cd.detectChanges();
+    }
+  }
+
   setCurrency(object:any){
-    console.log(object)
     localStorage.setItem('currency', JSON.stringify(object));
   }
 
@@ -48,17 +73,37 @@ export class HeaderComponent {
     const headerBar = this.el.nativeElement.querySelector('.header-bar');
     const menu = this.el.nativeElement.querySelector('.menu');
 
-    if (headerBar) {
-      this.renderer.addClass(headerBar, 'active');
-    }
+    // if (headerBar) {
+    //   this.renderer.addClass(headerBar, 'active');
+    //   this.cd.detectChanges()
+    // }
 
     if (menu) {
       if (this.isMenuOpen) {
         this.renderer.removeClass(menu, 'active');
+        this.cd.detectChanges();
       } else {
         this.renderer.addClass(menu, 'active');
+        this.cd.detectChanges();
       }
       this.isMenuOpen = !this.isMenuOpen; // Toggle the menu state
     }
   }
+
+  @HostListener('window:scroll', ['$event'])
+  onScroll(event: Event) {
+    const header = this.el.nativeElement.querySelector('.header-section');
+
+    if (window.pageYOffset > 100) {
+      this.renderer.addClass(header, 'sticky');
+    } else {
+      this.renderer.removeClass(header, 'sticky');
+    }
+  }
+
+  showItems(){
+    return this.cart.getCart();
+  }
+
 }
+

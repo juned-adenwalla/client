@@ -1,6 +1,6 @@
 <!-- ==========Page Header Section Starts Here========== -->
-<div class="pageheader" style="background-image:url(assets/images/bg/home1/1.webp)">
-    <div class="container">
+<div class="pageheader" style="background-image:url(assets/images/banner.jpg)">
+    <div class="container" style="margin-top: 100px;">
         <div class="pageheader__content">
             <h2>Course View</h2>
             <nav aria-label="breadcrumb">
@@ -28,7 +28,7 @@
                                         <video *ngIf="lessondata?.type == 'recorded'" style="width: 100%;border-radius:10px;margin-bottom:20px" id="player" playsinline controls data-poster="<?php echo base_url('uploads/coursethumbnail/' . $courseThumbnail); ?>">
                                             <source src="{{baseurl}}/api/files/get/{{lessondata?.video}}" type="video/mp4" />
                                         </video>
-                                        <div *ngIf="lessondata?.type == 'live'">
+                                        <div *ngIf="lessondata?.type == 'live' && lessondata?.status == 1">
                                             <div *ngIf="!shouldShowLesson()">
                                                 <h3>Lecture Has Not Started Yet</h3>
                                                 <p>Start Date : {{lessondata?.startdate | date:'mediumDate'}}, {{lessondata?.starttime}} IST</p>
@@ -40,6 +40,9 @@
                                                     Join Live Course
                                                 </a>
                                             </div>
+                                        </div>
+                                        <div *ngIf="!lessondata?.status || lessondata?.status == 0">
+                                            <span style="text-align: center;color: red;font-weight: 500;font-size: 22px;">Lecture Cancelled</span>
                                         </div>
                                     </div>
                                     <div class="blog__content">
@@ -58,9 +61,10 @@
                                         </div>
                                         <h4>{{lessondata?.name}}</h4>
                                         <div [innerHTML]="lessondata?.description" [ngClass]="{'limitTextHeight': isReadMore}"></div>
-                                        <button class="btn btn-danger" type="button" style="margin-top: 20px;" (click)="showText()">
+                                        <a style="color: red;" type="button" style="margin-top: 20px;" (click)="showText()">
                                             {{ isReadMore ? '⇩ Read More': '⇧ Read Less' }}
-                                        </button>
+                                        </a><br>
+                                        <button style="margin-top: 20px;" (click)="downloadFile(baseurl + '/api/files/get/' + lessondata?.attachment)" *ngIf="lessondata?.attachment" class="btn btn-danger"><i class="fa fa-fw fa-cloud-arrow-down"></i> Download Attachment</button>
                                     </div>
                                 </div>
                             </div>
@@ -71,13 +75,19 @@
                                 <p class="mb-0">Select a lesson from the options below to embark on your learning journey.</p>
                             </div>
                             <div class="accordion" id="accordionExample">
-                                    <ul class="list-group" *ngFor="let data of lessonlist;let i = index">
-                                        <li style="margin-bottom: 10px;" (click)="getLessonData(data?._id)" class="list-group-item" >
-                                            {{data?.name}}  {{data?.type}}
-                                            <span style="float: right; padding:5px;background-color: green;color: white;border-radius: 7px;font-size: 12px;">{{data?.type | titlecase}}</span>
-                                        </li>
-                                      </ul>
-                              </div>
+                                <ul class="list-group" *ngFor="let data of lessonlist;let i = index">
+                                    <li style="margin-bottom: 10px;" class="list-group-item" >
+                                        <span (click)="getLessonData(data?._id)">{{data?.name}}</span>
+                                        <input type="radio" *ngIf="data?.type == 'recorded'" [disabled]="showCheckbox()" [checked]="doesLessonIdExist(data?._id)" (click)="completeLesson(data?._id)" style="float: right; width: 25px;height:25px;margin-left: 20px;">
+                                        <!-- <input type="radio" *ngIf="data?.type == 'live'" [disabled]="!shouldShowLesson()" [checked]="doesLessonIdExist(data?._id)" (click)="completeLesson(data?._id)" style="float: right; width: 25px;height:25px;margin-left: 20px;"> -->
+                                        <span *ngIf="data?.type == 'recorded'" style="float: right; padding:5px;background-color: green;color: white;border-radius: 7px;font-size: 12px;">{{data?.type | titlecase}} Lecture</span>
+                                        <span *ngIf="data?.type == 'live'" style="float: right; padding:5px;background-color: rgb(255, 167, 34);color: white;border-radius: 7px;font-size: 12px;">{{data?.type | titlecase}} Lecture</span>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div *ngIf="lessonlist.length == completed.length" style="margin-top: 50px;">
+                                <a href="https://docs.google.com/forms/d/e/1FAIpQLSci0jnyK7ruSZqiOCle1zgxwDHDRzFP4moh1qjFKSJ3vm7eiA/viewform?usp=sf_link" target="_blank" style="float: right;" class="trk-btn trk-btn--rounded trk-btn--primary1"><i class="fa fa-fw fa-rocket"></i> Get Certificate</a>
+                            </div>
                         </div>
                     </div>
                 </div>

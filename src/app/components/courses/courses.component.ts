@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ActivatedRoute, Route, Router } from '@angular/router';
 import { forkJoin } from 'rxjs';
 import { BaseService } from 'src/app/services/base.service';
 import { environment } from 'src/environments/environments';
@@ -21,9 +22,16 @@ export class CoursesComponent {
   searchvalue: any;
   p: number = 1;
   currencycode: any;
-  constructor(private baseService:BaseService) { }
+  router: any;
+  constructor(private baseService:BaseService,private route: ActivatedRoute) { }
   ngOnInit() {
     this.initFunction();
+    const param = this.route.params.subscribe((res:any)=>{
+      this.router = {value:res.id}
+      if(res.id){
+        this.filterCourse(this.router,'category');
+      }
+    });
   }
 
   initFunction(){
@@ -44,25 +52,29 @@ export class CoursesComponent {
       if(res[2]){
         if(res[2]["status"]){
           this.courses = res[2]["data"];
-          console.log('courses:',this.courses)
         }
       }
       this.isLoading = false;
     })
   }
 
-  filterCourse(searchvalue:any){
-    this.searchvalue = searchvalue;
+  filterCourse(searchvalue:any = undefined,searchby:any = undefined){
+    console.log('Search Values:',searchvalue.value)
+    if(searchby == 'category'){
+      searchvalue = searchvalue.value;
+    }
     let header = {
       "pagenumber": this.pagenumber,
       "pagelimit": this.pagelimit,
       "sortby": this.sortby,
       "sorttype": this.sorttype,
-      "searchby": "category",
+      "searchby": searchby,
       "searchvalue": searchvalue,
       "collection": "tblcourses"
     }
-    this.baseService.get('/api/midoffice/list/all-data',header).subscribe((res:any)=>{
+    console.log(header)
+    this.baseService.get('/api/base/list/all-data',header).subscribe((res:any)=>{
+      console.log(res)
       if(res["status"]){
         this.courses = res["data"];
       }

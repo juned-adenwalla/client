@@ -1,6 +1,6 @@
 <!-- ==========Page Header Section Starts Here========== -->
-<div class="pageheader" style="background-image:url(assets/images/bg/home1/1.webp)">
-    <div class="container">
+<div class="pageheader" style="background-image:url(assets/images/banner.jpg)">
+    <div class="container" style="margin-top: 100px;">
         <div class="pageheader__content">
             <h2>Sign Up</h2>
             <nav aria-label="breadcrumb">
@@ -39,6 +39,20 @@
                                 </div>
                                 <span style="color: red;" *ngIf="warning['username']">Username is Required*</span>    
                             </div>
+                            <div class="col-lg-6">
+                              <div class="input-group">
+                                <input type="text" name="name" class="form-control" id="account-firstname"
+                                    placeholder="First name" [(ngModel)]="formdata['first_name']" required>
+                                </div>
+                                <span style="color: red;" *ngIf="warning['first_name']">First Name is Required*</span> 
+                            </div>
+                            <div class="col-lg-6">
+                              <div class="input-group">
+                                <input type="text" name="name" class="form-control" id="account-lastname"
+                                    placeholder="Last name" [(ngModel)]="formdata['last_name']" required>
+                                </div>
+                                <span style="color: red;" *ngIf="warning['last_name']">Last Name is Required*</span> 
+                            </div>
                             <div class="col-lg-12">
                                 <div class="input-group">
                                     <input type="email" name="email" class="form-control" id="account-email"
@@ -56,8 +70,14 @@
 
                             <div class="col-lg-12">
                                 <div class="input-group">
-                                    <input type="password" name="password" class="form-control showhide-pass" id="account-pass"
+                                    <input type="{{inputType}}" name="password" class="form-control showhide-pass" id="account-pass"
                                         placeholder="Password" [(ngModel)]="formdata['password']" required>
+                                    <button *ngIf="inputType == 'password'" type="button" (click)="togglePasswordVisibility()" id="btnToggle" class="toggle">
+                                      <i id="eyeIcon" class="fa fa-eye"></i>
+                                    </button>
+                                    <button *ngIf="inputType != 'password'" type="button" (click)="togglePasswordVisibility()" id="btnToggle" class="toggle">
+                                      <i id="eyeIcon" class="fa fa-eye-slash" ></i>
+                                    </button>   
                                 </div>
                                 <span style="color: red;" *ngIf="warning['password']">Password is Required*</span>    
                             </div>
@@ -65,15 +85,17 @@
 
                         <div class="account__form-passcheck">
                             <div class="form-check">
-                                <input type="checkbox" class="form-check-input" value="" id="terms-check" required>
+                                <input type="checkbox"(change)="terms == true ? terms = false : terms = true" class="form-check-input" value="" id="terms-check" required>
                                 <label for="terms-check" class="form-check-label">
-                                    Agree to our <a routerLink="terms-and-condition"> terms & conditions</a>
+                                    By Creating Account you agree to our <a routerLink="terms-and-condition"> terms & conditions</a>
                                 </label>
                             </div>
                         </div>
 
-                        <button type="submit" name="register" (click)="userSignup()"
-                            class="trk-btn trk-btn--border trk-btn--secondary1 d-block mt-4">Sign Up</button>
+                        <button [disabled]="!terms" type="submit" name="register" (click)="userSignup()"
+                            class="trk-btn trk-btn--border trk-btn--secondary1 d-block mt-4"><div *ngIf="isLoading" class="spinner-border" role="status">
+                              <span class="visually-hidden">Loading...</span>
+                            </div><div *ngIf="!isLoading">Sign Up</div></button>
 
                     <div class="account__switch">
                         <p>Already have an account? <a routerLink="/login">Log in</a></p>
@@ -103,22 +125,25 @@
                         
                       <div class="row mt-4 pt-2">
                         <div class="col">
-                          <input type="text" [(ngModel)]="otpdata['1']" class="form-control1 form-control-lg text-center py-4" maxlength="1" autofocus="">
+                          <input #otp1 (ngModelChange)="moveToNext(otp2)" type="text" [(ngModel)]="otpdata['1']" class="form-control1 form-control-lg text-center py-4" maxlength="1" autofocus="">
                         </div>
                         <div class="col">
-                          <input type="text" [(ngModel)]="otpdata['2']" class="form-control1 form-control-lg text-center py-4" maxlength="1">
+                          <input #otp2 (ngModelChange)="moveToNext(otp3)" type="text" [(ngModel)]="otpdata['2']" class="form-control1 form-control-lg text-center py-4" maxlength="1">
                         </div>
                         <div class="col">
-                          <input type="text" [(ngModel)]="otpdata['3']" class="form-control1 form-control-lg text-center py-4" maxlength="1">
+                          <input #otp3 (ngModelChange)="moveToNext(otp4)" type="text" [(ngModel)]="otpdata['3']" class="form-control1 form-control-lg text-center py-4" maxlength="1">
                         </div>
                         <div class="col">
-                          <input type="text" [(ngModel)]="otpdata['4']" class="form-control1 form-control-lg text-center py-4" maxlength="1">
+                          <input #otp4 type="text" [(ngModel)]="otpdata['4']" class="form-control1 form-control-lg text-center py-4" maxlength="1">
                         </div>
                       </div>
             
                       <a (click)="veryClient()" class="trk-btn trk-btn--border trk-btn--secondary1 d-block mt-4">
-                        Verify my account
+                        <div *ngIf="isLoading" class="spinner-border" role="status">
+                          <span class="visually-hidden">Loading...</span>
+                        </div><div *ngIf="!isLoading">Verify my account</div>
                       </a>
+                      <a routerLink="/login" class="text-center text-muted mt-10" style="margin-top: 10px;">Skip for Now</a>
                     </div>
                   </div>
             

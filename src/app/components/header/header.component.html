@@ -1,66 +1,94 @@
-    <!-- ===============>> Header section start here <<================= -->
-    <header class="header-section brand-1">
-        <div class="header-bottom">
-            <div class="container">
-                <div class="header-wrapper">
-                    <div class="header-start header-start--style1">
-                        <div class="logo">
-                            <a routerLink="/">
-                                <img style="width: 120px;" src="{{baseurl}}/api/files/get/{{sitedata?.sitelogo}}" alt="logo">
-                            </a>
-                        </div>
-                        <div class="menu-area">
-                            <ul class="menu menu--style1">
-                                <li>
-                                    <a routerLink="">Home</a>
-                                </li>
-                                <li>
-                                    <a routerLink="about-us">About us</a>
-                                </li>
-                                <li>
-                                    <a routerLink="all-courses">Courses</a>
-                                </li>
-                                <li>
-                                    <a routerLink="art-therapy">Art Therapy</a>
-                                </li>
-                                <li>
-                                    <a routerLink="all-blogs">Blogs</a>
-                                </li>
-                                <li>
-                                    <a routerLink="contact-us">Contact Us</a>
-                                </li>
-                                <li>
-                                    <a>
-                                        <select name="currency" [(ngModel)]="selectedCurrency" (change)="setCurrency(selectedCurrency)">
-                                            <option selected>Select Currency</option>
-                                            <option *ngFor="let data of currencies" [ngValue]="data">{{data?.name}}</option>
-                                        </select>
-                                    </a>
-                                    
-                                </li>
-                            </ul>
-
-                        </div>
+<header class="header-section header-section--style2 sticky-header">
+    <section style="height: 50px;background-color: #081A28;">
+        <div class="container">
+              <div class="align-middle">
+                <div style="float: left;margin-top: 12px;margin-right: 30px;">
+                    <span style="color: white;"><img src="assets/images/email.png" alt="phone" style="width: 25px;margin-top: -5px;background-color: white;border-radius: 15px;"> &nbsp;&nbsp;<a style="color: white;" href="mailTo:{{sitedata?.siteemail}}">{{sitedata?.siteemail}}</a></span>
+                    <span class="d-none d-sm-inline" style="color: white;margin-left: 30px;"><img src="assets/images/telephone.png" alt="phone" style="width: 25px;margin-top: -5px;background-color: white;border-radius: 15px;">&nbsp;&nbsp;<a style="color: white;" href="tel:{{sitedata?.sitephone}}">{{sitedata?.sitephone}}</a></span> 
+                </div>
+                <a routerLink="/checkout" style="padding: 2px;background-color: red;border-radius: 6px;color: white;width: 40;height: 30px;margin-top: 10px;float: right;">
+                    <i class="fa-solid fa-cart-shopping"></i>&nbsp;{{showItems().length}}
+                </a>
+                <select name="currency" style="width: 80px; margin-top: 12px;float: right;margin-right: 20px;" [(ngModel)]="selectedCurrency" (change)="setCurrency(selectedCurrency)">
+                  <option selected>Select Currency</option>
+                  <option *ngFor="let data of currencies" [ngValue]="data">{{ data?.symbol}} {{data?.name}}</option>
+                </select>
+                <ul class="social">
+                    <li class="social__item d-none d-md-block" style="margin-top: 10px;">
+                        <a href="https://www.facebook.com/Moniqart.in/"><img src="assets/images/facebook.png" style="width:25px" alt="facebook"></a>
+                    </li>
+                    <li class="social__item d-none d-md-block" style="margin-top: 10px;">
+                        <a href="https://www.instagram.com/moniqart.in/"><img src="assets/images/instagram.png" style="width:25px" alt="facebook"></a>
+                    </li>
+                    <li class="social__item d-none d-md-block" style="margin-top: 10px;">
+                        <a href="https://www.youtube.com/@moniqart-artastherapy1929"><img src="assets/images/youtube.png" style="width:25px" alt="facebook"></a>
+                    </li>
+                    <li class="social__item d-none d-md-block" style="margin-top: 10px;">
+                        <a href="https://wa.link/7lsmge"><img src="assets/images/whatsapp.png" style="width:25px" alt="whatsapp"></a>
+                    </li>
+                    <li class="social__item d-none d-md-block" style="margin-top: 10px;">
+                        <a href="https://www.linkedin.com/in/art-therapist-mona-joy-66228864/?originalSubdomain=in"><img src="assets/images/linkedin.png" style="width:25px" alt="linkedin"></a>
+                    </li>
+                </ul>
+              </div>
+          </div>
+    </section>
+    <div class="header-bottom">
+        <div class="container">
+            <div class="header-wrapper">
+                <div class="header-start header-start--style1">
+                    <div class="logo">
+                        <a routerLink="/">
+                            <img style="width: 130px;" class="d-none d-lg-block d-xl-block d-xxl-block" src="{{baseurl}}/api/files/get/{{sitedata?.sitelogo}}" alt="logo">
+                            <img style="width: 100px;" class="d-block d-sm-block d-md-block d-lg-none d-xl-none d-xxl-none" src="{{baseurl}}/api/files/get/{{sitedata?.sitelogo}}" alt="logo">
+                        </a>
                     </div>
-                    <div class="header-end">
-                        <div class="menu-area">
-                            <div class="header-btn">
-                                <span class="trk-btn trk-btn--rounded trk-btn--primary1">
-                                    <a routerLink="signup" style="color: white;" *ngIf="!userdata">Sign Up</a>
-                                    <a routerLink="my-account" style="color: white;" *ngIf="userdata">Account</a>
-                                </span>
+                    <div class="menu-area">
+                        <ul class="menu menu--style1">
+                            <li>
+                                <a routerLink=""><i class="fa-solid fa-house"></i> Home</a>
+                            </li>
+                            <li style="margin-right: 30px;">
+                                <a routerLink="about-us"><i class="fa-solid fa-circle-info"></i> About</a>
+                                <ul class="submenu">
+                                    <li><a style="color: black;" routerLink="all-blogs">Blogs</a></li>
+                                    <li><a style="color: black;" routerLink="gallery">Gallery</a></li>
+                                    <li><a style="color: black;" routerLink="news-articles">News</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a routerLink="all-courses"><i class="fa-solid fa-school"></i> Courses</a>
+                            </li>
+                            <li>
+                                <a routerLink="art-therapy"><i class="fa-solid fa-brush"></i> Art Therapy</a>
+                            </li>
+                            <li>
+                                <a routerLink="shop"><i class="fa-solid fa-shop"></i> Shop</a>
+                            </li>
+                            <li>
+                                <a routerLink="contact-us"><i class="fa-solid fa-phone"></i> Contact</a>
+                            </li>
+                          
+                        </ul>
+                    </div>
+                </div>
+                <div class="header-end">
+                    <div class="menu-area">
+                        <a routerLink="my-account" class="header-btn">
+                            <div class="trk-btn trk-btn--rounded trk-btn--primary1">
+                                <span>My Account</span>                                
                             </div>
+                        </a>
 
-                            <!-- toggle icons -->
-                            <div (click)="toggleHeaderBar()" [class.active]="isMenuOpen" class="header-bar d-xl-none home1">
-                                <span></span>
-                                <span></span>
-                                <span></span>
-                            </div>
+                        <!-- toggle icons -->
+                        <div (click)="toggleHeaderBar()" [class.active]="isMenuOpen" class="header-bar d-xl-none home1">
+                            <span style="background-color: black;"></span>
+                            <span style="background-color: black;"></span>
+                            <span style="background-color: black;"></span>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </header>
-    <!-- ===============>> Header section end here <<================= -->
+    </div>
+</header>

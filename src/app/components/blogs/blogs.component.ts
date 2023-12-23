@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { forkJoin } from 'rxjs';
 import { BaseService } from 'src/app/services/base.service';
 import { environment } from 'src/environments/environments';
+import { Meta,Title } from "@angular/platform-browser";
 
 @Component({
   selector: 'app-blogs',
@@ -13,7 +14,8 @@ export class BlogsComponent {
   blogs: any;
   baseurl:any = environment.baseurl;
   p: number = 1;
-  constructor(private baseService:BaseService) { }
+  isLoading:any = true;
+  constructor(private baseService:BaseService,private meta: Meta,private title: Title) { }
   ngOnInit() {
     this.initFunction();
   }
@@ -27,13 +29,13 @@ export class BlogsComponent {
           this.categories = res[0]["data"];
         }
       }
-
       if(res[1]){
         if(res[1]["status"]){
           this.blogs = res[1]["data"];
         }
       }
-    })
+      this.isLoading = false
+    });
   }
 
   searchCategoryById(idToFind: number): any | undefined {

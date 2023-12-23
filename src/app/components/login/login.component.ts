@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth.service';
 import { BaseService } from 'src/app/services/base.service';
+
 import Swal from 'sweetalert2';
 
 @Component({
@@ -10,37 +12,56 @@ import Swal from 'sweetalert2';
 })
 export class LoginComponent {
   formdata: any = {};
+  inputType:any = 'password';
+  isLoading:any = false;
+  forgetpass:any = false;
   warning:any = {
     useremail:false,
     password:false
   }
-  constructor(private baseService:BaseService,private router:Router) {}
+  constructor(private baseService:BaseService,private router:Router,private auth:AuthService) {}
 
   ngOnInit(){
-    if(localStorage.getItem("userdata")){
+    if(this.auth.getUser()){
       this.router.navigate(["/my-account"])
     }
   }
 
+  togglePasswordVisibility() {
+    this.inputType = this.inputType === 'password' ? 'text' : 'password';
+  }
+
   signinUser(){
     if(this.validate()){
+      this.isLoading = true;
       this.baseService.post('/api/auth/login',this.formdata,{}).subscribe((res:any)=>{
-        console.log(res)
         if(res["status"]){
-          localStorage.setItem('access_token', res.token);
-          localStorage.setItem('userdata', JSON.stringify(res.user));
+          this.auth.userLogin(res.user);
+          this.isLoading = false;
           this.router.navigate(['/my-account']);
         }else{
           Swal.fire("Failed",res["message"],"warning");
+          this.isLoading = false;
         }
       });
     }
   }
 
+  resetPassword(){
+    this.isLoading = true;
+    this.baseService.post('/api/auth/forget-password',{email:this.formdata['useremail']},{}).subscribe((res:any)=>{
+      if(res["status"]){
+        Swal.fire("Success","Please Check your Inbox","success");
+      }else{
+        Swal.fire("Failed",res["message"],"warning");
+        this.isLoading = false;
+      }
+    });
+  }
+
   validate(){
     // Iterate through form fields and check for missing required fields
     for (const key of Object.keys(this.warning)) {
-      console.log(this.formdata[key])
       if (!this.formdata[key]) {
         this.warning[key] = true;
       }else{

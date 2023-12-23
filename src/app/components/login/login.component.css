@@ -1,0 +1,10 @@
+.toggle {
+    background: none;
+    border: none;
+    color: #7a7b7c;
+    font-weight: 600;
+    position: absolute;
+    right: 0.75em;
+    top: 1em;
+    z-index: 9;
+}

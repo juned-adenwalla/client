@@ -1,11 +1,11 @@
 // =================== preloader js  ================== //
 window.addEventListener('load', function () {
-    var preloader = document.querySelector('.preloader');
-    preloader.style.transition = 'opacity .5s ease';
-    preloader.style.opacity = '0';
-    setTimeout(function () {
-        preloader.style.display = 'none';
-    }, 1500);
+    // var preloader = document.querySelector('.preloader');
+    // preloader.style.transition = 'opacity .5s ease';
+    // preloader.style.opacity = '0';
+    // setTimeout(function () {
+    //     preloader.style.display = 'none';
+    // }, 1500);
 });
 
 // =================== preloader js end ================== //
@@ -151,366 +151,366 @@ AOS.init();
 // =================== custom trk slider js here =================== //
 
 // component slider here
-const Swiper1 = new Swiper('.course__slider', {
-    spaceBetween: 24,
-    grabCursor: true,
-    loop: true,
-    slidesPerView: 1,
-    breakpoints: {
-        576: {
-            slidesPerView: 1,
-        },
-        768: {
-            slidesPerView: 2,
-        },
-        992: {
-            slidesPerView: 3,
-            spaceBetween: 15,
-        },
-        1200: {
-            slidesPerView: 3,
-            spaceBetween: 25,
-        },
-        1400: {
-            slidesPerView: 5,
-            spaceBetween: 20,
-        },
-        1600: {
-            slidesPerView: 5,
-            spaceBetween: 20,
-        },
-    },
+// const Swiper1 = new Swiper('.course__slider', {
+//     spaceBetween: 24,
+//     grabCursor: true,
+//     loop: true,
+//     slidesPerView: 1,
+//     breakpoints: {
+//         576: {
+//             slidesPerView: 1,
+//         },
+//         768: {
+//             slidesPerView: 2,
+//         },
+//         992: {
+//             slidesPerView: 3,
+//             spaceBetween: 15,
+//         },
+//         1200: {
+//             slidesPerView: 3,
+//             spaceBetween: 25,
+//         },
+//         1400: {
+//             slidesPerView: 5,
+//             spaceBetween: 20,
+//         },
+//         1600: {
+//             slidesPerView: 5,
+//             spaceBetween: 20,
+//         },
+//     },
 
-    autoplay: {
-        delay: 1,
-        disableOnInteraction: true,
-    },
-    speed: 3000,
-    pagination: {
-        el: ".slider__pagination-1",
-        clickable: true
-    },
-});
+//     autoplay: {
+//         delay: 1,
+//         disableOnInteraction: true,
+//     },
+//     speed: 3000,
+//     pagination: {
+//         el: ".slider__pagination-1",
+//         clickable: true
+//     },
+// });
 
 
-const course__sliderpopular = new Swiper('.course__sliderpopular', {
-    spaceBetween: 24,
-    grabCursor: true,
-    loop: true,
-    slidesPerView: 1,
-    breakpoints: {
-        576: {
-            slidesPerView: 1,
-        },
-        768: {
-            slidesPerView: 2,
-        },
-        992: {
-            slidesPerView: 3,
-            spaceBetween: 15,
-        },
-        1200: {
-            slidesPerView: 3,
-            spaceBetween: 25,
-        },
-        1400: {
-            slidesPerView: 4,
-            spaceBetween: 20,
-        }
+// const course__sliderpopular = new Swiper('.course__sliderpopular', {
+//     spaceBetween: 24,
+//     grabCursor: true,
+//     loop: true,
+//     slidesPerView: 1,
+//     breakpoints: {
+//         576: {
+//             slidesPerView: 1,
+//         },
+//         768: {
+//             slidesPerView: 2,
+//         },
+//         992: {
+//             slidesPerView: 3,
+//             spaceBetween: 15,
+//         },
+//         1200: {
+//             slidesPerView: 3,
+//             spaceBetween: 25,
+//         },
+//         1400: {
+//             slidesPerView: 4,
+//             spaceBetween: 20,
+//         }
 
-    },
+//     },
 
-    autoplay: {
-        delay: 1,
-        disableOnInteraction: true,
-    },
-    speed: 3000,
-    pagination: {
-        el: ".slider__pagination-1",
-        clickable: true
-    },
-});
+//     autoplay: {
+//         delay: 1,
+//         disableOnInteraction: true,
+//     },
+//     speed: 3000,
+//     pagination: {
+//         el: ".slider__pagination-1",
+//         clickable: true
+//     },
+// });
 
 // home 4 course slider
-const Swiper4 = new Swiper('.course__slider--style4', {
-    spaceBetween: 24,
-    grabCursor: true,
-    loop: true,
-    slidesPerView: 1,
-    breakpoints: {
-        576: {
-            slidesPerView: 1,
-        },
-        768: {
-            slidesPerView: 2,
-        },
-        992: {
-            slidesPerView: 3,
-            spaceBetween: 15,
-        }
-    },
+// const Swiper4 = new Swiper('.course__slider--style4', {
+//     spaceBetween: 24,
+//     grabCursor: true,
+//     loop: true,
+//     slidesPerView: 1,
+//     breakpoints: {
+//         576: {
+//             slidesPerView: 1,
+//         },
+//         768: {
+//             slidesPerView: 2,
+//         },
+//         992: {
+//             slidesPerView: 3,
+//             spaceBetween: 15,
+//         }
+//     },
 
-    autoplay: {
-        delay: 1,
-        disableOnInteraction: true,
-    },
-    speed: 3000,
-    pagination: {
-        el: ".slider__pagination-2",
-        clickable: true
-    },
-});
+//     autoplay: {
+//         delay: 1,
+//         disableOnInteraction: true,
+//     },
+//     speed: 3000,
+//     pagination: {
+//         el: ".slider__pagination-2",
+//         clickable: true
+//     },
+// });
 
 // home 1 testimonial  slider here
 
-var swiperAuthor = new Swiper(".testimonial__author", {
-    spaceBetween: 1,
-    slidesPerView: 4,
-    clickable: true,
-    spaceBetween: 10,
-    breakpoints: {
+// var swiperAuthor = new Swiper(".testimonial__author", {
+//     spaceBetween: 1,
+//     slidesPerView: 4,
+//     clickable: true,
+//     spaceBetween: 10,
+//     breakpoints: {
 
-        768: {
-            slidesPerView: 5,
-        },
-        1200: {
-            slidesPerView: 5,
-            spaceBetween: 15,
-        },
-        1440: {
-            slidesPerView: 5,
-            spaceBetween: 20,
-        }
-    },
-});
-
-
-const Swiper2 = new Swiper('.testimonial__slider', {
-    grabCursor: true,
-    effect: "fade",
-    loop: true,
-    slidesPerView: 1,
-    speed: 500,
-    thumbs: {
-        swiper: swiperAuthor,
-    },
-    autoplay: true,
-});
+//         768: {
+//             slidesPerView: 5,
+//         },
+//         1200: {
+//             slidesPerView: 5,
+//             spaceBetween: 15,
+//         },
+//         1440: {
+//             slidesPerView: 5,
+//             spaceBetween: 20,
+//         }
+//     },
+// });
 
 
+// const Swiper2 = new Swiper('.testimonial__slider', {
+//     grabCursor: true,
+//     effect: "fade",
+//     loop: true,
+//     slidesPerView: 1,
+//     speed: 500,
+//     thumbs: {
+//         swiper: swiperAuthor,
+//     },
+//     autoplay: true,
+// });
 
-const studentreview = new Swiper('.studentreview__slider', {
-    spaceBetween: 24,
-    grabCursor: true,
-    loop: true,
-    breakpoints: {
-        576: {
-            slidesPerView: 2,
-        },
-        768: {
-            slidesPerView: 2,
-        },
-        992: {
-            slidesPerView: 3,
-            spaceBetween: 15,
-        },
-        1200: {
-            slidesPerView: 4,
-            spaceBetween: 25,
-        },
-    },
-    autoplay: {
-        delay: 1,
-        disableOnInteraction: true,
-    },
-    speed: 5000,
-});
+
+
+// const studentreview = new Swiper('.studentreview__slider', {
+//     spaceBetween: 24,
+//     grabCursor: true,
+//     loop: true,
+//     breakpoints: {
+//         576: {
+//             slidesPerView: 2,
+//         },
+//         768: {
+//             slidesPerView: 2,
+//         },
+//         992: {
+//             slidesPerView: 3,
+//             spaceBetween: 15,
+//         },
+//         1200: {
+//             slidesPerView: 4,
+//             spaceBetween: 25,
+//         },
+//     },
+//     autoplay: {
+//         delay: 1,
+//         disableOnInteraction: true,
+//     },
+//     speed: 5000,
+// });
 
 
 // home 1 partner  slider here
-const Swiper3 = new Swiper('.partner__slider', {
-    spaceBetween: 24,
-    grabCursor: true,
-    loop: true,
-    slidesPerView: 2,
-    breakpoints: {
-        576: {
-            slidesPerView: 2,
-        },
-        768: {
-            slidesPerView: 3,
-        },
-        992: {
-            slidesPerView: 4,
-            spaceBetween: 15,
-        },
-        1200: {
-            slidesPerView: 5,
-            spaceBetween: 25,
-        },
-    },
-    autoplay: {
-        delay: 1,
-        disableOnInteraction: true,
-    },
-    speed: 3000,
-});
+// const Swiper3 = new Swiper('.partner__slider', {
+//     spaceBetween: 24,
+//     grabCursor: true,
+//     loop: true,
+//     slidesPerView: 2,
+//     breakpoints: {
+//         576: {
+//             slidesPerView: 2,
+//         },
+//         768: {
+//             slidesPerView: 3,
+//         },
+//         992: {
+//             slidesPerView: 4,
+//             spaceBetween: 15,
+//         },
+//         1200: {
+//             slidesPerView: 5,
+//             spaceBetween: 25,
+//         },
+//     },
+//     autoplay: {
+//         delay: 1,
+//         disableOnInteraction: true,
+//     },
+//     speed: 3000,
+// });
 
 
 // home 2 course category slider
 // component slider here
-const Swiper5 = new Swiper('.categories__slider', {
-    spaceBetween: 24,
-    grabCursor: true,
-    loop: true,
-    slidesPerView: 1,
-    breakpoints: {
-        576: {
-            slidesPerView: 2,
-        },
-        768: {
-            slidesPerView: 3,
-        },
-        992: {
-            slidesPerView: 4,
-            spaceBetween: 15,
-        },
-        1400: {
-            slidesPerView: 5,
-            spaceBetween: 25,
-        }
-    },
-    speed: 3000,
-    pagination: {
-        el: ".slider__pagination-1",
-        clickable: true
-    },
-});
+// const Swiper5 = new Swiper('.categories__slider', {
+//     spaceBetween: 24,
+//     grabCursor: true,
+//     loop: true,
+//     slidesPerView: 1,
+//     breakpoints: {
+//         576: {
+//             slidesPerView: 2,
+//         },
+//         768: {
+//             slidesPerView: 3,
+//         },
+//         992: {
+//             slidesPerView: 4,
+//             spaceBetween: 15,
+//         },
+//         1400: {
+//             slidesPerView: 5,
+//             spaceBetween: 25,
+//         }
+//     },
+//     speed: 3000,
+//     pagination: {
+//         el: ".slider__pagination-1",
+//         clickable: true
+//     },
+// });
 
 // testimonial
-const Swiper7 = new Swiper('.testimonial__slider2', {
-    spaceBetween: 24,
-    grabCursor: true,
-    loop: true,
-    breakpoints: {
-        576: {
-            slidesPerView: 1,
-        },
-        768: {
-            slidesPerView: 2,
-        },
-        992: {
-            slidesPerView: 2,
-            spaceBetween: 15,
-        },
-        1400: {
-            slidesPerView: 2,
-            spaceBetween: 25,
-        }
-    },
-    speed: 3000,
-    pagination: {
-        el: ".slider__pagination-3",
-        clickable: true
-    },
-});
+// const Swiper7 = new Swiper('.testimonial__slider2', {
+//     spaceBetween: 24,
+//     grabCursor: true,
+//     loop: true,
+//     breakpoints: {
+//         576: {
+//             slidesPerView: 1,
+//         },
+//         768: {
+//             slidesPerView: 2,
+//         },
+//         992: {
+//             slidesPerView: 2,
+//             spaceBetween: 15,
+//         },
+//         1400: {
+//             slidesPerView: 2,
+//             spaceBetween: 25,
+//         }
+//     },
+//     speed: 3000,
+//     pagination: {
+//         el: ".slider__pagination-3",
+//         clickable: true
+//     },
+// });
 
 
 
 // home 3 slider
 // team slider 
-const swiper11 = new Swiper('.team__slider1', {
-    slidesPerView: 2,
-    grabCursor: true,
-    spaceBetween: 24,
-    loop: true,
-    breakpoints: {
-        576: {
-            slidesPerView: 2,
-        },
-        768: {
-            slidesPerView: 3,
-        },
-        992: {
-            slidesPerView: 4,
-            spaceBetween: 15,
-        },
-        // 1200: {
-        //     slidesPerView: 5,
-        //     spaceBetween: 25,
-        // },
-    },
-    autoplay: {
-        delay: 1,
-        disableOnInteraction: true,
-    },
-    speed: 5000,
-});
-const swiper12 = new Swiper('.team__slider2', {
-    slidesPerView: 2,
-    grabCursor: true,
-    spaceBetween: 24,
-    loop: true,
-    breakpoints: {
-        576: {
-            slidesPerView: 2,
-        },
-        768: {
-            slidesPerView: 3,
-        },
-        992: {
-            slidesPerView: 4,
-            spaceBetween: 15,
-        },
-        // 1200: {
-        //     slidesPerView: 5,
-        //     spaceBetween: 25,
-        // },
-    },
-    autoplay: {
-        delay: 1,
-        reverseDirection: true,
-        disableOnInteraction: true,
-    },
-    speed: 5000,
-});
+// const swiper11 = new Swiper('.team__slider1', {
+//     slidesPerView: 2,
+//     grabCursor: true,
+//     spaceBetween: 24,
+//     loop: true,
+//     breakpoints: {
+//         576: {
+//             slidesPerView: 2,
+//         },
+//         768: {
+//             slidesPerView: 3,
+//         },
+//         992: {
+//             slidesPerView: 4,
+//             spaceBetween: 15,
+//         },
+//         // 1200: {
+//         //     slidesPerView: 5,
+//         //     spaceBetween: 25,
+//         // },
+//     },
+//     autoplay: {
+//         delay: 1,
+//         disableOnInteraction: true,
+//     },
+//     speed: 5000,
+// });
+// const swiper12 = new Swiper('.team__slider2', {
+//     slidesPerView: 2,
+//     grabCursor: true,
+//     spaceBetween: 24,
+//     loop: true,
+//     breakpoints: {
+//         576: {
+//             slidesPerView: 2,
+//         },
+//         768: {
+//             slidesPerView: 3,
+//         },
+//         992: {
+//             slidesPerView: 4,
+//             spaceBetween: 15,
+//         },
+//         // 1200: {
+//         //     slidesPerView: 5,
+//         //     spaceBetween: 25,
+//         // },
+//     },
+//     autoplay: {
+//         delay: 1,
+//         reverseDirection: true,
+//         disableOnInteraction: true,
+//     },
+//     speed: 5000,
+// });
 
 
 
-var testimonialStoryteller = new Swiper(".testimonial__author3", {
-    spaceBetween: 24,
-    watchSlidesProgress: true,
-    loop: true,
-    clickable: true,
-    breakpoints: {
-        576: {
-            slidesPerView: 1,
-        },
-        768: {
-            slidesPerView: 2,
-        },
-        992: {
-            slidesPerView: 3,
-            spaceBetween: 15,
-        },
-        1200: {
-            slidesPerView: 4,
-            spaceBetween: 24,
-        }
-    },
-});
+// var testimonialStoryteller = new Swiper(".testimonial__author3", {
+//     spaceBetween: 24,
+//     watchSlidesProgress: true,
+//     loop: true,
+//     clickable: true,
+//     breakpoints: {
+//         576: {
+//             slidesPerView: 1,
+//         },
+//         768: {
+//             slidesPerView: 2,
+//         },
+//         992: {
+//             slidesPerView: 3,
+//             spaceBetween: 15,
+//         },
+//         1200: {
+//             slidesPerView: 4,
+//             spaceBetween: 24,
+//         }
+//     },
+// });
 
 // testimonial
-const testimonialSlider3 = new Swiper('.testimonial__slider3', {
-    spaceBetween: 40,
-    grabCursor: true,
-    loop: true,
-    slidesPerView: 1,
-    speed: 3000,
-    thumbs: {
-        swiper: testimonialStoryteller,
-    },
-});
+// const testimonialSlider3 = new Swiper('.testimonial__slider3', {
+//     spaceBetween: 40,
+//     grabCursor: true,
+//     loop: true,
+//     slidesPerView: 1,
+//     speed: 3000,
+//     thumbs: {
+//         swiper: testimonialStoryteller,
+//     },
+// });
 
 
 
@@ -519,36 +519,36 @@ const testimonialSlider3 = new Swiper('.testimonial__slider3', {
 
 
 // blog
-const BlogSlider = new Swiper('.blog__slider', {
-    spaceBetween: 24,
-    grabCursor: true,
-    loop: true,
-    breakpoints: {
-        576: {
-            slidesPerView: 1,
-        },
-        768: {
-            slidesPerView: 2,
-        },
-        992: {
-            slidesPerView: 3,
-            spaceBetween: 15,
-        },
-        1200: {
-            slidesPerView: 4,
-            spaceBetween: 15,
-        },
-        1400: {
-            slidesPerView: 5,
-            spaceBetween: 25,
-        }
-    },
-    autoplay: {
-        delay: 1,
-        disableOnInteraction: true,
-    },
-    speed: 3000,
-});
+// const BlogSlider = new Swiper('.blog__slider', {
+//     spaceBetween: 24,
+//     grabCursor: true,
+//     loop: true,
+//     breakpoints: {
+//         576: {
+//             slidesPerView: 1,
+//         },
+//         768: {
+//             slidesPerView: 2,
+//         },
+//         992: {
+//             slidesPerView: 3,
+//             spaceBetween: 15,
+//         },
+//         1200: {
+//             slidesPerView: 4,
+//             spaceBetween: 15,
+//         },
+//         1400: {
+//             slidesPerView: 5,
+//             spaceBetween: 25,
+//         }
+//     },
+//     autoplay: {
+//         delay: 1,
+//         disableOnInteraction: true,
+//     },
+//     speed: 3000,
+// });
 
 
 // =================== custom trk slider end here =================== //
@@ -597,7 +597,7 @@ if (scrollToTop) {
 
 
 // =================== count start here =================== //
-new PureCounter();
+// new PureCounter();
 // =================== count end here =================== //
 
 

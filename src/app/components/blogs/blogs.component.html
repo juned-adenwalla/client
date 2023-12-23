@@ -1,6 +1,6 @@
  <!-- ==========Page Header Section Starts Here========== -->
- <div class="pageheader" style="background-image:url(assets/images/bg/home1/1.webp)">
-    <div class="container">
+ <div class="pageheader" style="background-image:url(assets/images/banner.jpg)">
+    <div class="container" style="margin-top: 100px;">
         <div class="pageheader__content">
             <h2>Blogs</h2>
             <nav aria-label="breadcrumb">
@@ -19,12 +19,12 @@
 <!-- ===============>> Blog section start here <<================= -->
 <section class="blog blog--style1 padding-top padding-bottom" data-aos="fade-up" data-aos-duration="800">
     <div class="container">
-        <div class="section-header text-center">
+        <!-- <div class="section-header text-center">
             <h2>Latest News, Blog & Articles</h2>
-        </div>
-        <div class="blog__wrapper">
-            <div class="row g-4" style="margin-bottom: 50px;" >
-                <div *ngFor="let data of blogs | paginate: { itemsPerPage: 10, currentPage: p }" class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-duration="700">
+        </div> -->
+        <div class="blog__wrapper" *ngIf="!isLoading">
+            <div class="row g-4" style="margin-bottom: 100px;" >
+                <div *ngFor="let data of blogs | paginate: { itemsPerPage: 9, currentPage: p }" class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-duration="700">
                     <div class="blog__item">
                         <div class="blog__item-inner">
                             <div class="blog__thumb">
@@ -46,8 +46,9 @@
                     </div>
                 </div>
             </div>
-            <pagination-controls (pageChange)="p = $event"></pagination-controls>
+            <pagination-controls *ngIf="blogs.length > 9" (pageChange)="p = $event"></pagination-controls>
         </div>
+        <app-shimmer *ngIf="isLoading" [module]="'blogs'"></app-shimmer>
     </div>
 </section>
 <!-- ===============>> Blog section end here <<================= -->

@@ -26,6 +26,13 @@ import { PrivacyComponent } from './components/privacy/privacy.component';
 import { RefundsComponent } from './components/refunds/refunds.component';
 import { BlogViewComponent } from './components/blog-view/blog-view.component';
 import { CourseViewComponent } from './components/course-view/course-view.component';
+import { SharedModule } from './shared/shared.module';
+import { ProductsComponent } from './components/products/products.component';
+import { ProductDetailComponent } from './components/product-detail/product-detail.component';
+import { MembershipComponent } from './components/membership/membership.component';
+import { GalleryComponent } from './components/gallery/gallery.component';
+import { NewsComponent } from './components/news-articles/news.component';
+import { ThankYouComponent } from './components/thank-you/thank-you.component';
 
 registerLocaleData(localeIn);
 
@@ -50,6 +57,12 @@ registerLocaleData(localeIn);
     RefundsComponent,
     BlogViewComponent,
     CourseViewComponent,
+    ProductsComponent,
+    ProductDetailComponent,
+    MembershipComponent,
+    GalleryComponent,
+    NewsComponent,
+    ThankYouComponent
   ],
   imports: [
     BrowserModule,
@@ -57,6 +70,7 @@ registerLocaleData(localeIn);
     HttpClientModule,
     NgxPaginationModule,
     FormsModule,
+    SharedModule
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'en-IN' }

@@ -1,0 +1,83 @@
+.tab-container {
+    width: 100%; /* Set the desired width for the container */
+    overflow-x: auto; /* Enable horizontal scrolling */
+    white-space: nowrap; /* Prevent line breaks between tabs */
+  }
+  
+  .nav-tabs {
+    display: inline-block; /* Display the tabs in a single line */
+  }
+  
+  .nav-item {
+    display: inline-block; /* Display each tab item inline */
+    margin-right: 10px; /* Add some spacing between tabs */
+  }
+  
+  /* Style for the active tab */
+  .cardd{
+    border-right: 2px solid #D2D2D2;
+    border-radius: 5px;
+    padding-right: 20px;
+  }
+  @media (max-width: 450px) {
+    /* Your CSS styles for screens up to 350 pixels wide go here */
+    .cardd{
+      /* border-bottom: 2px solid gray; */
+      border-right: none;
+      padding-bottom: 50px;
+    }
+    .d-flex {
+      display: flex!important;
+      overflow-x: scroll;
+      white-space: nowrap;
+    }
+    .mx-auto {
+      margin-right: 0px!important;
+      margin-left: 0px!important;
+    }
+    .text-sm-left{
+      margin-top: 30px;
+    }
+  }
+
+  /* -------------------------------------
+    INVOICE
+    Styles for the billing table
+------------------------------------- */
+.invoice {
+  text-align: left;
+  width: 100%;
+}
+.invoice td {
+  padding: 5px 0;
+}
+.invoice .invoice-items {
+  width: 100%;
+}
+.invoice .invoice-items td {
+  border-top: #eee 1px solid;
+}
+.invoice .invoice-items .total td {
+  border-top: 2px solid #333;
+  border-bottom: 2px solid #333;
+  font-weight: 700;
+}
+.foundation{
+  border: 1px solid #ccc;
+padding: 0 0 5px;
+}
+
+.foundation h3{
+border-bottom: 1px solid #ccc;padding-left:3%;margin-top: 0px;padding-top: 5px;padding-bottom: 5px;font-size:16px;
+
+}
+.foundation_sm ul{
+margin:0px;
+padding:0px;
+}
+.foundation_sm li{
+list-style:none;
+}
+.foundation_sm li i{
+ padding-right: 6px;
+}

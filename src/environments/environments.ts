@@ -1,4 +1,4 @@
 export const environment = {
     production: true,
-    baseurl:'https://api.moniqart.com',
-   };
+    baseurl:'https://api.adenwalla.in',
+};

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { forkJoin } from 'rxjs';
 import { BaseService } from 'src/app/services/base.service';
+import { CartService } from 'src/app/services/cart.service';
 import { environment } from 'src/environments/environments';
 
 @Component({
@@ -19,7 +20,9 @@ export class CourseDetailComponent {
   sitedata: any;
   lessons: any;
   currencycode: any;
-  constructor(private baseService:BaseService,private route: ActivatedRoute) {
+  products: any;
+  p: number = 1;
+  constructor(private baseService:BaseService,private route: ActivatedRoute,private cart: CartService) {
     const param = this.route.params.subscribe((res:any)=>{
       this.paramid = res.id
     });
@@ -41,6 +44,11 @@ export class CourseDetailComponent {
       console.log('res:',res)
       if(res[0]["status"]){
         this.coursedata = res[0]["data"][0];
+        this.baseService.get('/api/midoffice/list/collection/tblproducts',{filter:"category",value:this.coursedata?.category}).subscribe((res:any)=>{
+          if(res["status"]){
+            this.products = res["data"];
+          }
+        });
       }
       if(res[1]["status"]){
         this.categories = res[1]["data"];
@@ -66,18 +74,33 @@ export class CourseDetailComponent {
     const selectedCurrency:any = localStorage.getItem('currency');
     const obj = JSON.parse(selectedCurrency);
     this.currencycode = obj.name
+    console.log(obj.name)
     return obj.value * amount;
   }
 
   shouldShowLesson(): boolean {
     const now = new Date();
-    const startDate = new Date(this.coursedata?.startdate);
-    const endDate = new Date(this.coursedata?.enddate);
+    const startDateString = this.coursedata?.startdate; // Assuming you have "2023-09-05" as the start date format
 
-    // Check if startdate is today and starttime is within 15 minutes
-    return (
-      startDate.toDateString() <= now.toDateString()
+    // Parse the start date string into a Date object
+    const startDateParts = startDateString.split('-'); // Split the string into parts
+    const startDate = new Date(
+      parseInt(startDateParts[0]), // Year
+      parseInt(startDateParts[1]) - 1, // Month (subtract 1 as months are 0-indexed)
+      parseInt(startDateParts[2]) // Day
     );
+
+    // Check if startDate is today or later
+    const isStartDateTodayOrLater = startDate >= now;
+
+    return isStartDateTodayOrLater;
+  }
+
+  addToCart(data:any){
+    data['type'] = 'course';
+    if(data){
+      this.cart.addToCart(data);
+    }
   }
 
 }

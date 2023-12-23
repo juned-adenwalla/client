@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Location } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { forkJoin } from 'rxjs';
 import { BaseService } from 'src/app/services/base.service';
@@ -14,10 +15,13 @@ export class BlogViewComponent {
   blogdata: any;
   categories: any;
   baseurl:any = environment.baseurl;
-  constructor(private baseService:BaseService,private route: ActivatedRoute) {
+  currentUrl: any;
+  isLoading:any = true;
+  constructor(private baseService:BaseService,private route: ActivatedRoute,private location: Location) {
     const param = this.route.params.subscribe((res:any)=>{
       this.paramid = res.id
     });
+    this.currentUrl = this.location.path();
   }
   ngOnInit() {
     this.initFunction();
@@ -38,6 +42,7 @@ export class BlogViewComponent {
       if(res[1]["status"]){
         this.categories = res[1]["data"];
       }
+      this.isLoading = false;
     });
   }
 
