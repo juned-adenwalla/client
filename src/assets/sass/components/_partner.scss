@@ -1,0 +1,6 @@
+.partner{
+    @extend %of-hidden;
+    &--style2{
+        @extend %py-65;
+    }
+}

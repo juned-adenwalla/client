@@ -1,0 +1,92 @@
+<!-- ==========Page Header Section Starts Here========== -->
+<div class="pageheader" style="background-image:url(assets/images/bg/home1/1.webp)">
+    <div class="container">
+        <div class="pageheader__content">
+            <h2>Course View</h2>
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Course</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+</div>
+<!-- ==========Page Header Section Ends Here========== -->
+
+<!-- ===============>> Blog-details section start here <<================= -->
+<div class="blog home blog--details padding-top padding-bottom" *ngIf="!isLoading">
+    <div class="container" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="100">
+        <div class="section__wrapper">
+            <div class="row g-5">
+                <div class="col-lg-12 col-12">
+                    <div class="row g-4 justify-content-center">
+                        <div class="col-12">
+                            <div class="blog__item" *ngIf="lessondata">
+                                <div class="blog__inner">
+                                    <div class="blog__thumb">
+                                        <video *ngIf="lessondata?.type == 'recorded'" style="width: 100%;border-radius:10px;margin-bottom:20px" id="player" playsinline controls data-poster="<?php echo base_url('uploads/coursethumbnail/' . $courseThumbnail); ?>">
+                                            <source src="{{baseurl}}/api/files/get/{{lessondata?.video}}" type="video/mp4" />
+                                        </video>
+                                        <div *ngIf="lessondata?.type == 'live'">
+                                            <div *ngIf="!shouldShowLesson()">
+                                                <h3>Lecture Has Not Started Yet</h3>
+                                                <p>Start Date : {{lessondata?.startdate | date:'mediumDate'}}, {{lessondata?.starttime}} IST</p>
+                                            </div>
+                                            <div *ngIf="shouldShowLesson()">
+                                                <h3>Lecture Started</h3>
+                                                <p>Start Date : {{lessondata?.startdate | date:'mediumDate'}}, {{lessondata?.starttime}} IST</p>
+                                                <a style="background-color: #e5b519;" href="{{lessondata?.url}}" target="_blank" class="trk-btn trk-btn--rounded trk-btn--primary1">
+                                                    Join Live Course
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="blog__content">
+                                        <div class="blog__meta">
+                                            <ul>
+                                                <span style="background-color: #FFE3EC;font-size: 0.75rem;padding: 0.15rem 1rem;border-radius: 50px;color: #081A28;font-weight: 500;text-transform: capitalize;">
+                                                    {{searchCategoryById(coursedata?.category)[0]?.name}} 
+                                                </span>
+                                                <span style="background-color: #99fc96;font-size: 0.75rem;padding: 0.15rem 1rem;border-radius: 50px;color: #081A28;font-weight: 500;text-transform: capitalize;">
+                                                    {{searchCategoryById(coursedata?.subcategory)[0]?.name}} 
+                                                </span>
+                                                <span style="background-color: #F2E9FF;font-size: 0.75rem;padding: 0.15rem 1rem;border-radius: 50px;color: #081A28;font-weight: 500;text-transform: capitalize;">
+                                                    {{lessondata?.type | titlecase}}
+                                                </span>
+                                            </ul>
+                                        </div>
+                                        <h4>{{lessondata?.name}}</h4>
+                                        <div [innerHTML]="lessondata?.description" [ngClass]="{'limitTextHeight': isReadMore}"></div>
+                                        <button class="btn btn-danger" type="button" style="margin-top: 20px;" (click)="showText()">
+                                            {{ isReadMore ? '⇩ Read More': '⇧ Read Less' }}
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="alert alert-success" role="alert" *ngIf="!lessondata">
+                                <h4 class="alert-heading">Well done!</h4>
+                                <p>Hello, future artist! 🌐 It's time to unlock your potential. Start your course by picking a lesson that resonates with you. Your learning adventure starts now!</p>
+                                <hr>
+                                <p class="mb-0">Select a lesson from the options below to embark on your learning journey.</p>
+                            </div>
+                            <div class="accordion" id="accordionExample">
+                                    <ul class="list-group" *ngFor="let data of lessonlist;let i = index">
+                                        <li style="margin-bottom: 10px;" (click)="getLessonData(data?._id)" class="list-group-item" >
+                                            {{data?.name}}  {{data?.type}}
+                                            <span style="float: right; padding:5px;background-color: green;color: white;border-radius: 7px;font-size: 12px;">{{data?.type | titlecase}}</span>
+                                        </li>
+                                      </ul>
+                              </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="d-flex justify-content-center" *ngIf="isLoading">
+    <div class="spinner-border" role="status">
+    </div>
+</div>
+<!-- ===============>> Blog-details section end here <<================= -->

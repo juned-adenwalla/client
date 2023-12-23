@@ -1,0 +1,68 @@
+<!-- ==========Page Header Section Starts Here========== -->
+<div class="pageheader" style="background-image:url(assets/images/bg/home1/1.webp)">
+    <div class="container">
+        <div class="pageheader__content">
+            <h2>Blog Post</h2>
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Blog</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+</div>
+<!-- ==========Page Header Section Ends Here========== -->
+
+
+
+
+<!-- ===============>> Blog-details section start here <<================= -->
+<div class="blog home blog--details padding-top padding-bottom">
+    <div class="container" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="100">
+        <div class="section__wrapper">
+            <div class="row g-5">
+                <div class="col-lg-12 col-12">
+                    <div class="row g-4 justify-content-center">
+                        <div class="col-12">
+                            <div class="blog__item">
+                                <div class="blog__inner">
+                                    <div class="blog__thumb">
+                                        <img src="{{baseurl}}/api/files/get/{{blogdata?.image}}" alt="blog-images">
+                                    </div>
+                                    <div class="blog__content">
+                                        <div class="blog__meta">
+                                            <ul>
+                                                <li><i class="fa-solid fa-clock"></i>
+                                                    {{blogdata?.CreationDate | date:'mediumDate'}}</li>
+                                                <li><span style="background-color: #99fc96;font-size: 0.75rem;padding: 0.15rem 1rem;border-radius: 50px;color: #081A28;font-weight: 500;text-transform: capitalize;">
+                                                    {{searchCategoryById(blogdata?.parentid)[0]?.name}} 
+                                                </span></li>
+                                            </ul>
+                                        </div>
+                                        <h2>{{blogdata?.title}}</h2>
+                                        <div [innerHTML]="blogdata?.content"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="blog__tag">
+                                <ul class="social-link-list">
+                                    <li><a href="#" class="facebook"><i
+                                                class="fa-brands fa-facebook-f"></i>Share</a>
+                                    </li>
+                                    <li><a href="#" class="twitter"><i class="fa-brands fa-twitter"></i>Tweet</a>
+                                    </li>
+                                    <li><a href="#" class="linkedin"><i
+                                                class="fa-brands fa-linkedin-in"></i>LinkedIn</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ===============>> Blog-details section end here <<================= -->

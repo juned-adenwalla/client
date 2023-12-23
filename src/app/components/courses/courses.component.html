@@ -1,0 +1,83 @@
+ <!-- ==========Page Header Section Starts Here========== -->
+ <div class="pageheader" style="background-image:url(assets/images/bg/home1/1.webp)">
+    <div class="container">
+        <div class="pageheader__content">
+            <h2>Courses</h2>
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Courses</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+</div>
+<!-- ==========Page Header Section Ends Here========== -->
+
+
+
+
+<!-- ==========Courses Section start Here========== -->
+<div class="course course--style1 padding-top padding-bottom" *ngIf="!isLoading">
+    <div class="container">
+        <div class="course__topbar">
+            <!-- <div class="course__topbar-left" data-aos="fade-right" data-aos-duration="800">
+                <select name="cars" class="form-select">
+                    <option value="filter">Filter By</option>
+                    <option value="content">UI/UX </option>
+                    <option value="web">Web Design</option>
+                    <option value="graphic">Graphic</option>
+                    <option value="seo">Social</option>
+                </select>
+            </div> -->
+            <!-- <div class="course__topbar-right" data-aos="fade-left" data-aos-duration="800">
+                <ul class="nav nav-pills" id="pills-tab" role="tablist">
+                    <li *ngFor="let data of categories" class="nav-item" role="presentation">
+                        <button (click)="filterCourse(data?._id)" class="tab-btn {{searchvalue ? searchvalue == data?._id ? 'active' : '' : ''}}">{{data?.name}}</button>
+                    </li>
+                </ul>
+            </div> -->
+        </div>
+
+        <div class="course__wrapper" style="margin-bottom: 50px;" data-aos="fade-up" data-aos-duration="800">
+            <div class="tab-content" id="pills-tabContent">
+                <div class="tab-pane fade show active" id="pills-english" role="tabpanel" content
+                    aria-labelledby="pills-english-tab" tabindex="0">
+                    <div class="row g-4">
+                        <div *ngFor="let data of courses | paginate: { itemsPerPage: 10, currentPage: p }" class="col-lg-4 col-md-6">
+                            <div class="course__item">
+                                <div class="course__item-inner">
+                                    <div class="course__thumb">
+                                        <a routerLink="/course/{{data?._id}}"><img style="height: 200px;" src="{{baseurl}}/api/files/get/{{data?.thumbnail}}" alt="course Images"></a>
+                                        <a href="#" class="course__btn course__btn--save course__btn--active"><i
+                                                class="fa-regular fa-bookmark"></i></a>
+                                    </div>
+        
+                                    <div class="course__content">
+                                        <div class="course__content-top">
+                                            <span class="course__meta-tag course__meta-tag--cat1">{{searchCategoryById(data?.category)[0]?.name}}</span>
+                                        </div>
+                                        <h6> <a routerLink="/course/{{data?._id}}">{{data?.name}}</a> </h6>
+                                        <div class="course__content-bottom">
+                                            <a><img style="width: 30px;height: 30px;" src="{{baseurl}}/api/files/get/{{searchTraineryById(data?.coursetrainer)[0]?.userimage}}"
+                                                    alt="avatar">{{searchTraineryById(data?.coursetrainer)[0]?.name}}</a>
+                                            <div class="course-price">
+                                                <del>{{currencyConversion(data?.pricing) | currency:currencycode}}</del> <span>{{currencyConversion(data?.offerprice) | currency:currencycode}}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <pagination-controls (pageChange)="p = $event"></pagination-controls>
+    </div>
+</div>
+<div class="d-flex justify-content-center" *ngIf="isLoading" style="padding-top: 100px;padding-bottom: 100px;">
+    <div class="spinner-border" role="status">
+    </div>
+</div>
+<!-- ==========Courses Section Ends Here========== -->

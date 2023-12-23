@@ -25,22 +25,35 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css"
+              "src/assets/css/all.min.css",
+              "src/assets/css/bootstrap.min.css",
+              "src/assets/css/style.css",
+              "src/assets/css/swiper-bundle.min.css"
             ],
-            "scripts": []
+            "scripts": [
+              "src/assets/js/all.min.js",
+              "src/assets/js/aos.js",
+              "src/assets/js/bootstrap.bundle.min.js",
+              "src/assets/js/custom.js",
+              "src/assets/js/fslightbox.js",
+              "src/assets/js/lightcase.js",
+              "src/assets/js/purecounter_vanilla.js",
+              "src/assets/js/swiper-bundle.min.js",
+              "src/assets/js/vanilla-counter.js"
+            ]
           },
           "configurations": {
             "production": {
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "500kb",
-                  "maximumError": "1mb"
+                  "maximumWarning": "5mb",
+                  "maximumError": "5mb"
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "2kb",
-                  "maximumError": "4kb"
+                  "maximumWarning": "5mb",
+                  "maximumError": "5mb"
                 }
               ],
               "outputHashing": "all"
@@ -87,9 +100,22 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css"
+              "src/assets/css/all.min.css",
+              "src/assets/css/bootstrap.min.css",
+              "src/assets/css/style.css",
+              "src/assets/css/swiper-bundle.min.css"
             ],
-            "scripts": []
+            "scripts": [
+              "src/assets/js/all.min.js",
+              "src/assets/js/aos.js",
+              "src/assets/js/bootstrap.bundle.min.js",
+              "src/assets/js/custom.js",
+              "src/assets/js/fslightbox.js",
+              "src/assets/js/lightcase.js",
+              "src/assets/js/purecounter_vanilla.js",
+              "src/assets/js/swiper-bundle.min.js",
+              "src/assets/js/vanilla-counter.js"
+            ]
           }
         }
       }

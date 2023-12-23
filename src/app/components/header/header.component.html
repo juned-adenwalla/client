@@ -1,0 +1,66 @@
+    <!-- ===============>> Header section start here <<================= -->
+    <header class="header-section brand-1">
+        <div class="header-bottom">
+            <div class="container">
+                <div class="header-wrapper">
+                    <div class="header-start header-start--style1">
+                        <div class="logo">
+                            <a routerLink="/">
+                                <img style="width: 120px;" src="{{baseurl}}/api/files/get/{{sitedata?.sitelogo}}" alt="logo">
+                            </a>
+                        </div>
+                        <div class="menu-area">
+                            <ul class="menu menu--style1">
+                                <li>
+                                    <a routerLink="">Home</a>
+                                </li>
+                                <li>
+                                    <a routerLink="about-us">About us</a>
+                                </li>
+                                <li>
+                                    <a routerLink="all-courses">Courses</a>
+                                </li>
+                                <li>
+                                    <a routerLink="art-therapy">Art Therapy</a>
+                                </li>
+                                <li>
+                                    <a routerLink="all-blogs">Blogs</a>
+                                </li>
+                                <li>
+                                    <a routerLink="contact-us">Contact Us</a>
+                                </li>
+                                <li>
+                                    <a>
+                                        <select name="currency" [(ngModel)]="selectedCurrency" (change)="setCurrency(selectedCurrency)">
+                                            <option selected>Select Currency</option>
+                                            <option *ngFor="let data of currencies" [ngValue]="data">{{data?.name}}</option>
+                                        </select>
+                                    </a>
+                                    
+                                </li>
+                            </ul>
+
+                        </div>
+                    </div>
+                    <div class="header-end">
+                        <div class="menu-area">
+                            <div class="header-btn">
+                                <span class="trk-btn trk-btn--rounded trk-btn--primary1">
+                                    <a routerLink="signup" style="color: white;" *ngIf="!userdata">Sign Up</a>
+                                    <a routerLink="my-account" style="color: white;" *ngIf="userdata">Account</a>
+                                </span>
+                            </div>
+
+                            <!-- toggle icons -->
+                            <div (click)="toggleHeaderBar()" [class.active]="isMenuOpen" class="header-bar d-xl-none home1">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- ===============>> Header section end here <<================= -->

@@ -1,0 +1,176 @@
+ <!-- ==========Page Header Section Starts Here========== -->
+<div class="pageheader" style="background-image:url(assets/images/bg/home1/1.webp)">
+    <div class="container">
+        <div class="pageheader__content">
+            <h2>Checkout</h2>
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Checkout</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+</div>
+<!-- ==========Page Header Section Ends Here========== -->
+
+
+
+
+<!-- ============ shop Section start Here========== -->
+<section class="checkout padding-top padding-bottom">
+    <div class="container">
+        <div class="checkout__wrapper">
+            <!-- <form action="#" class="checkout__form"> -->
+                <div class="row g-5">
+                    <div class="col-lg-8">
+                        <div class="checkout__details" data-aos="fade-right" data-aos-duration="800"
+                            data-aos-delay="100">
+                            <div class="row g-4">
+                                <div class="col-lg-12">
+                                    <div class="checkout__title">
+                                        <h5>Checkout</h5>
+                                    </div>
+                                    <div class="checkout__subtitle">
+                                        <p>Billing Details</p>
+                                    </div>
+
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" id="first-name"
+                                            placeholder="First name*" [(ngModel)]="formdata['name']" required>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="input-group">
+                                        <input type="email" [(ngModel)]="formdata['email']"  class="form-control" id="last-name"
+                                            placeholder="Email*" required>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="input-group">
+                                        <input type="tel" class="form-control" [(ngModel)]="formdata['phone']"  id="address" placeholder="Phone*"
+                                            required>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" id="address2"
+                                            placeholder="Address" required>
+                                    </div>
+                                </div>
+                                <div class="col-lg-12">
+                                    <div class="input-group">
+                                        <textarea id="account-desc" class="form-control" rows="4"
+                                            placeholder="Write a message..." cols="50"></textarea>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="order" data-aos="fade-left" data-aos-duration="800" data-aos-delay="100">
+                            <div class="checkout__title">
+                                <h5>Order Summary</h5>
+                            </div>
+                            <div class="order__details table-responsive">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>Product</th>
+                                            <th>Total</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td colspan="2">
+                                                <table class="table table-borderless">
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>
+                                                                <div class="o-info">
+                                                                    <img style="width: 50px;height:50px" src="{{baseurl}}/api/files/get/{{coursedata?.thumbnail}}"
+                                                                        alt="course">
+                                                                    <div class="o-details">
+                                                                        <a routerLink="/course/{{coursedata?._id}}">{{coursedata?.name}}</a>
+                                                                        <div class="c-reviews">
+                                                                            <span style="background-color: #FFE3EC;font-size: 0.75rem;padding: 0.15rem 1rem;border-radius: 50px;color: #081A28;font-weight: 500;text-transform: capitalize;">
+                                                                                {{coursedata?.coursetype}} 
+                                                                             </span>
+                                                                             <span style="background-color: #F2E9FF;font-size: 0.75rem;padding: 0.15rem 1rem;border-radius: 50px;color: #081A28;font-weight: 500;text-transform: capitalize;">
+                                                                                {{coursedata?.coursechannel}} 
+                                                                             </span>
+                                                                        </div>
+
+                                                                    </div>
+
+                                                                </div>
+
+                                                            </td>
+                                                            <td>{{currencyConversion(coursedata?.offerprice) | currency:currencycode}}</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                        <tr *ngFor="let data of feedata">
+                                            <th scope="row">{{data?.name}}</th>
+                                            <td *ngIf="data?.type == 'fixed'">+ {{currencyConversion(data?.value) | currency:currencycode}}</td>
+                                            <td *ngIf="data?.type == 'percentage'">+ {{data?.value}}%</td>
+                                        </tr>
+                                            <tr *ngFor="let data of validcoupon">
+                                                    <th scope="row">{{data?.name}}</th>
+                                                    <td *ngIf="data?.type == 'fixed'">- {{currencyConversion(data?.value) | currency:currencycode}}</td>
+                                                <td *ngIf="data?.type == 'percentage'">- {{data?.value}}%</td>
+                                            </tr>
+                                    </tbody>
+                                    
+                                    <tfoot>
+                                        <tr>
+                                            <th>Total<p>Fee included, where applicable</p>
+                                            </th>
+                                            <td><strong>{{currencyConversion(total) | currency:currencycode}}</strong></td>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                                <input class="form-control" type="text" style="height: 35px;width:100%;margin-bottom:10px"  (change)="couponApply($event.target)" name="payment-radio" placeholder="Enter Coupon">
+                            </div>
+                            <!-- <div class="order__option">
+                                <div class="order__option-title">
+                                    <p>Payment</p>
+                                </div>
+                                <div class="order__option-item">
+                                    <div class="form-radio">
+                                        <input class="form-radio" type="radio" name="payment-radio" value=""
+                                            id="card">
+                                        <label class="form-check-label" for="card">
+                                            Credit/Debit Card
+                                        </label>
+                                    </div>
+                                    <div class="thumb">
+                                        <img src="assets/images/icon/card/1.png" alt="payment iocn">
+                                        <img src="assets/images/icon/card/2.png" alt="payment iocn">
+                                    </div>
+                                </div>
+                            </div> -->
+
+                            <div class="order__check mt-3">
+                                <div class="form-check">
+                                    <label class="form-check-label" for="data">
+                                        Your personal data will be used to process your order.
+                                    </label>
+                                </div>
+                            </div>
+                            <button type="submit" (click)="onSubmit()"
+                                class="trk-btn trk-btn--border trk-btn--secondary1 d-block mt-4">Place
+                                Order</button>
+                        </div>
+                    </div>
+                </div>
+            <!-- </form> -->
+        </div>
+    </div>
+</section>
+<!-- ============ shop Section Ends Here========== -->

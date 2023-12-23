@@ -1,0 +1,53 @@
+ <!-- ==========Page Header Section Starts Here========== -->
+ <div class="pageheader" style="background-image:url(assets/images/bg/home1/1.webp)">
+    <div class="container">
+        <div class="pageheader__content">
+            <h2>Blogs</h2>
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Blogs</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+</div>
+<!-- ==========Page Header Section Ends Here========== -->
+
+
+
+<!-- ===============>> Blog section start here <<================= -->
+<section class="blog blog--style1 padding-top padding-bottom" data-aos="fade-up" data-aos-duration="800">
+    <div class="container">
+        <div class="section-header text-center">
+            <h2>Latest News, Blog & Articles</h2>
+        </div>
+        <div class="blog__wrapper">
+            <div class="row g-4" style="margin-bottom: 50px;" >
+                <div *ngFor="let data of blogs | paginate: { itemsPerPage: 10, currentPage: p }" class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-duration="700">
+                    <div class="blog__item">
+                        <div class="blog__item-inner">
+                            <div class="blog__thumb">
+                                <a routerLink="/blog/{{data?._id}}"><img src="{{baseurl}}/api/files/get/{{data?.image}}" alt="blog Images"></a>
+                            </div>
+
+                            <div class="blog__content">
+                                <div class="blog__content-top">
+                                    <span class="blog__meta-tag blog__meta-tag--cat3">{{searchCategoryById(data?.parentid)[0]?.name}}</span>
+                                </div>
+                                <h6> <a routerLink="/blog/{{data?._id}}">{{data?.title}}</a> </h6>
+
+                                <div class="blog__content-bottom blog__content-bottom--border">
+                                    <a href="#"><span><i class="fa-solid fa-calendar-days"></i></span>
+                                        {{data?.CreationDate | date:'mediumDate'}}</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <pagination-controls (pageChange)="p = $event"></pagination-controls>
+        </div>
+    </div>
+</section>
+<!-- ===============>> Blog section end here <<================= -->

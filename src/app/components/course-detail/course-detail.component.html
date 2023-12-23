@@ -1,0 +1,230 @@
+<!-- ==========Page Header Section Starts Here========== -->
+<div class="pageheader" style="background-image:url('{{baseurl}}/api/files/get/{{coursedata?.banner}}')">
+    <div class="container">
+        <div class="pageheader__content">
+            <h2>Course Details</h2>
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Course Details</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+</div>
+<!-- ==========Page Header Section Ends Here========== -->
+
+
+<!-- ==========course details Section start Here========== -->
+<div class="coursedetails coursedetails--style1 padding-top padding-bottom">
+    <div class="container" data-aos="fade-up" data-aos-duration="800" *ngIf="!isLoading">
+        <div class="row flex-lg-row-reverse g-5">
+            <div class="col-lg-4">
+                <div class="coursedetails__package">
+                    <div class="coursedetails__thumb">
+                        <img src="{{baseurl}}/api/files/get/{{coursedata?.thumbnail}}" alt="packgae-image">
+                        <div class="coursedetails__thumb-playbtn">
+                            <a href="{{coursedata?.previewurl}}" target="_blank" data-fslightbox><img
+                                    src="assets/images/course/home1/2.png" alt="ply-btn"></a>
+                        </div>
+                    </div>
+                    <div class="coursedetails__offer">
+                        <div class="coursedetails__offer-price">
+                            <h3>{{currencyConversion(coursedata?.offerprice) | currency:currencycode}}</h3> <span>{{currencyConversion(coursedata?.pricing) | currency:currencycode}}</span>
+                        </div>
+                        <!-- <div class="coursedetails__offer-time">
+                            <p><i class="fa-solid fa-chart-simple"></i> <span>{{coursedata?.offerprice}}</span> Level</p>
+                        </div> -->
+                        <a *ngIf="shouldShowLesson()" routerLink="/checkout/{{coursedata?._id}}" class="trk-btn trk-btn--border trk-btn--secondary1 d-block">Buy
+                            Now</a>
+
+                        <a class="trk-btn trk-btn--border trk-btn--secondary1 d-block" *ngIf="!shouldShowLesson()">Booking Closed</a>
+                        Start Date : {{coursedata?.startdate | date:'mediumDate'}} <br>
+                        End Date : {{coursedata?.enddate | date:'mediumDate'}}
+
+                        <div class="coursedetails__offer-social">
+                            <ul class="social">
+                                <li class="social__item">
+                                    <a href="https://www.facebook.com/Moniqart.in/" target="_blank" class="social__link social__link--rounded5"><i
+                                            class="fab fa-facebook-f"></i></a>
+                                </li>
+                                <li class="social__item">
+                                    <a href="https://www.instagram.com/moniqart.in/" target="_blank"class="social__link social__link--rounded5"><i
+                                            class="fab fa-instagram"></i></a>
+                                </li>
+                                <li class="social__item">
+                                    <a href="https://www.youtube.com/@moniqart-artastherapy1929" target="_blank" class="social__link social__link--rounded5"><i
+                                            class="fab fa-youtube"></i></a>
+                                </li>
+                            </ul>
+                        </div>
+
+                    </div>
+                    <div class="coursedetails__footer">
+                        <p>For details the course</p>
+                        <a href="tel:16910"> <i class="fa-solid fa-phone"></i> Call ({{sitedata?.sitephone}})</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-8">
+                <div class="coursedetails__content">
+                    <div class="coursedetails__header">
+                        <h3>{{coursedata?.name}}</h3>
+                        <p>{{coursedata?.coursedescription}}</p>
+                        <div class="coursedetails__focus">
+                            <span style="background-color: #FFE3EC;font-size: 0.75rem;padding: 0.15rem 1rem;border-radius: 50px;color: #081A28;font-weight: 500;text-transform: capitalize;">
+                               {{searchCategoryById(coursedata?.category)[0]?.name}} 
+                            </span>
+                            <span style="background-color: #99fc96;font-size: 0.75rem;padding: 0.15rem 1rem;border-radius: 50px;color: #081A28;font-weight: 500;text-transform: capitalize;">
+                               {{searchCategoryById(coursedata?.subcategory)[0]?.name}} 
+                            </span>
+                            <span style="background-color: #F2E9FF;font-size: 0.75rem;padding: 0.15rem 1rem;border-radius: 50px;color: #081A28;font-weight: 500;text-transform: capitalize;">
+                               {{coursedata?.coursetype | titlecase}}
+                            </span>
+                        </div>
+
+                    </div>
+                    <div class="coursedetails__info">
+                        <ul class="nav nav-pills " id="pills-tab" role="tablist">
+                            <li class="nav-item active" role="presentation">
+                                <button class="trk-btn active" id="pills-overview-tab" data-bs-toggle="pill"
+                                    data-bs-target="#pills-overview" role="tab" aria-controls="pills-overview"
+                                    aria-selected="true"><i class="fa-solid fa-grip-vertical"></i> Overview</button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="trk-btn" id="pills-curriculum-tab" data-bs-toggle="pill"
+                                    data-bs-target="#pills-curriculum" role="tab" aria-controls="pills-curriculum"
+                                    aria-selected="false"><i class="fa-solid fa-file"></i> What you will Learn?</button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="trk-btn" id="pills-requirment-tab" data-bs-toggle="pill"
+                                    data-bs-target="#pills-requirment" role="tab" aria-controls="pills-requirment"
+                                    aria-selected="false"><i class="fa-solid fa-paperclip"></i> Requirment</button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="trk-btn" id="pills-eligibility-tab" data-bs-toggle="pill"
+                                    data-bs-target="#pills-eligibility" role="tab" aria-controls="pills-eligibility"
+                                    aria-selected="false"><i class="fa-solid fa-wrench"></i> Eligibility</button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="trk-btn" id="pills-help-tab" data-bs-toggle="pill"
+                                    data-bs-target="#pills-help" role="tab" aria-controls="pills-help"
+                                    aria-selected="false"> <i class="fa-solid fa-phone"></i> Help</button>
+                            </li>
+                        </ul>
+                        <div class="tab-content" id="pills-tabContent">
+                            <div class="tab-pane fade show active" id="pills-overview" role="tabpanel" content
+                                aria-labelledby="pills-overview-tab" tabindex="0">
+                                <div [innerHTML]="coursedata?.detaileddescription" class="coursedetails__overview" style="margin-top: 20px;">
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="pills-curriculum" role="tabpanel"
+                                aria-labelledby="pills-curriculum-tab" tabindex="0">
+                                <div class="coursedetails__curriculum">
+                                    <div [innerHTML]="coursedata?.whatlearn" class="coursedetails__overview" style="margin-top: 20px;">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="pills-requirment" role="tabpanel"
+                                aria-labelledby="pills-requirment-tab" tabindex="0">
+                                <div class="coursedetails__requirment">
+                                    <div [innerHTML]="coursedata?.requirements" class="coursedetails__requirment" style="margin-top: 20px;">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="pills-eligibility" role="tabpanel"
+                                aria-labelledby="pills-eligibility-tab" tabindex="0">
+                                <div class="coursedetails__eligibility" style="margin-top: 20px;">
+                                    <div [innerHTML]="coursedata?.eligibilitycriteria" class="coursedetails__eligibility">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="pills-help" role="tabpanel"
+                                aria-labelledby="pills-help-tab" tabindex="0">
+                                <div class="coursedetails__help">
+                                    <div class="coursedetails__overview">
+                                        <h5>Welcome to the Course Help Section! </h5>
+                                        <p> If you're experiencing any difficulties or have questions regarding your course, we're here to assist you. Our dedicated team of experts is committed to providing you with the support you need to succeed.</p>
+                                        <div class="coursedetails__overview-helpline">
+                                            <div class="row g-4 align-items-center">
+                                                <div class="col-md-6">
+                                                    <div class="thumb">
+                                                        <img src="assets/images/course/home1/1.png"
+                                                            alt="packgae-image">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="info ps-3">
+                                                        <h6>Our Hotline</h6>
+                                                        <a href="tel:{{sitedata?.sitephone}}"> <i class="fa-solid fa-phone"></i> Call
+                                                        {{sitedata?.sitephone}}</a>
+                                                    </div>
+                                                    <div class="info ps-3 mt-4">
+                                                        <h6>Email</h6>
+                                                        <a href="mailto:{{sitedata?.siteemail}}"> <i
+                                                                class="fa-solid fa-envelope"></i>
+                                                                {{sitedata?.siteemail}}</a>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="d-flex justify-content-center" *ngIf="isLoading">
+        <div class="spinner-border" role="status">
+        </div>
+    </div>
+</div>
+<!-- ==========course details Section Ends Here========== -->
+
+
+<!-- ==========Course Curriculum Section start Here========== -->
+<div class="coursedetails coursedetails--style2 padding-top padding-bottom brand1-bg-1" *ngIf="!isLoading">
+    <div class="container" data-aos="fade-up" data-aos-duration="800">
+        <div class="coursedetails__wrapper">
+            <div class="coursedetails__header">
+                <h3>Course Lessons</h3>
+                <div class="coursedetails__info">
+                    <div class="coursedetails__info-item">
+                        <h6>{{lessons?.length}}</h6>
+                        <span>Lesson</span>
+                    </div>
+                </div>
+            </div>
+            <div class="coursedetails__curriculum">
+                <div class="accordion" id="faqAccordion2">
+                    <div class="row g-4">
+                        <div *ngFor="let data of lessons; let i = index" class="col-12">
+                            <div class="accordion__item" *ngIf="data?.display == 1">
+                                <div class="accordion__header" id="faq1">
+                                    <button class="accordion__button collapsed" type="button"
+                                        data-bs-toggle="collapse" data-bs-target="#faqBody1" aria-expanded="false"
+                                        aria-controls="faqBody1">
+                                        <span class="lesson-name">{{data?.name}}</span> <span
+                                            class="lesson"><span class="lesson-number">Lession {{i + 1 < 10 ? '0' : ''}}{{i + 1}}</span> <span
+                                                class="plus-icon"></span> </span>
+                                    </button>
+                                </div>
+                                <div id="faqBody1" class="accordion-collapse collapse" aria-labelledby="faq1"
+                                    data-bs-parent="#faqAccordion1">
+                                    <div [innerHTML]="data?.description" class="accordion__body">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ==========Course Curriculum Section Ends Here========== -->

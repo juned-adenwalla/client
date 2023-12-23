@@ -1,0 +1,73 @@
+ <!-- ==========Page Header Section Starts Here========== -->
+ <div class="pageheader" style="background-image:url(assets/images/bg/home1/1.webp)">
+    <div class="container">
+        <div class="pageheader__content">
+            <h2>Login</h2>
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Login</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+</div>
+<!-- ==========Page Header Section Ends Here========== -->
+
+
+
+<!-- ===============>> account start here <<================= -->
+<section class="account padding-top padding-bottom">
+    <div class="container-fluid">
+        <div class="account__wrapper" data-aos="fade-up" data-aos-duration="800">
+            <div class="row g-4">
+                <div class="col-lg-12">
+                    <div class="account__content">
+                        <!-- account tittle -->
+                        <div class="account__header">
+                            <h3>Log in to your account</h3>
+                            <p>Welcome back! Please enter your details.</p>
+                        </div>
+                        <!-- account form -->
+                        <div class="row g-4">
+                            <div class="col-lg-12">
+                                <div class="input-group">
+                                    <input type="text" [(ngModel)]="formdata['useremail']" name="emailorphone" class="form-control" id="account-email"
+                                        placeholder="Enter your email" required>
+                                </div>
+                                <span style="color: red;" *ngIf="warning['useremail']">Email is Required*</span>    
+                            </div>
+                            <div class="col-lg-12">
+                                <div class="input-group">
+                                    <input type="password" [(ngModel)]="formdata['password']" name="password" class="form-control showhide-pass" id="account-pass"
+                                        placeholder="Password" required>
+                                </div>
+                                <span style="color: red;" *ngIf="warning['password']">Password is Required*</span>    
+                            </div>
+                        </div>
+
+                        <div class="account__form-passcheck">
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" value="" id="terms-check">
+                                <label for="terms-check" class="form-check-label">
+                                    Remember for 30 days
+                                </label>
+                            </div>
+                            <!-- <div class="account__form-forgotpass">
+                                <a>Forgot Password?</a>
+                            </div> -->
+                        </div>
+
+                        <button type="submit" name="login" (click)="signinUser()"
+                            class="trk-btn trk-btn--border trk-btn--secondary1 d-block mt-4">Sign in</button>
+
+                        <div class="account__switch">
+                            <p>Don't have an account? <a routerLink="/signup">Sign up</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- ===============>> account end here <<================= -->
