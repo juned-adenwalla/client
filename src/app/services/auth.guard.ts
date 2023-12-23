@@ -12,7 +12,6 @@ export class AuthGuard implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     if (this.auth.getUser()) {
-      console.log('coming herererererer')
       return true;
     } else {
       // Save the original URL the user was trying to access
